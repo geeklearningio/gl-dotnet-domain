@@ -6,6 +6,7 @@
 
 namespace GeekLearning.Domain.Exceptions
 {
+    using Explanations;
     using System;
 
     /// <summary>
@@ -19,15 +20,27 @@ namespace GeekLearning.Domain.Exceptions
         public DomainException()
             : base()
         {
+            this.Explanations = new Explanation[0];
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DomainException"/> class.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public DomainException(string message)
-            : base(message)
+        public DomainException(Explanation reason)
+            : base(reason.ToString())
         {
+            this.Explanations = new Explanation[] { reason };
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DomainException"/> class.
+        /// </summary>
+        /// <param name="message">The message that describes the error.</param>
+        public DomainException(params Explanation[] reasons)
+            : base(Explanation.ToString(reasons))
+        {
+            this.Explanations = reasons;
         }
 
         /// <summary>
@@ -38,9 +51,12 @@ namespace GeekLearning.Domain.Exceptions
         /// The exception that is the cause of the current exception, or a
         /// null reference (Nothing in Visual Basic) if no inner exception is specified.
         /// </param>
-        public DomainException(string message, Exception innerException)
-            : base(message, innerException)
+        public DomainException(Exception innerException, params Explanation[] reasons)
+            : base(Explanation.ToString(reasons), innerException)
         {
+            this.Explanations = reasons;
         }
+
+        public Explanation[] Explanations { get; }
     }
 }

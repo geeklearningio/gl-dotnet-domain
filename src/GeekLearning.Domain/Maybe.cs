@@ -8,8 +8,7 @@ namespace GeekLearning.Domain
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using GeekLearning.Domain.Validation;
+    using Explanations;
 
     /// <summary>
     /// Wrap an instance which may be empty for domain-oriented reasons.
@@ -17,7 +16,7 @@ namespace GeekLearning.Domain
     /// <typeparam name="T">The type of the wrapped instance.</typeparam>
     public class Maybe<T> where T : class
     {
-        private readonly IEnumerable<ValidationMessage> emptyReasons = new List<ValidationMessage>();
+        private readonly IEnumerable<Explanation> explanations = new List<Explanation>();
         private T value = null;
 
         /// <summary>
@@ -32,24 +31,19 @@ namespace GeekLearning.Domain
         /// <summary>
         /// Initializes a new instance of the <see cref="Maybe{T}"/> class.
         /// </summary>
-        /// <param name="emptyReasons">The reasons for which the wrapper is empty.</param>
-        private Maybe(IEnumerable<ValidationMessage> emptyReasons)
+        /// <param name="explanations">The reasons for which the wrapper is empty.</param>
+        private Maybe(IEnumerable<Explanation> explanations)
         {
-            this.emptyReasons = emptyReasons;
+            this.explanations = explanations;
         }
 
         /// <summary>
-        /// Gets an empty instance of the <see cref="Maybe{T}"/> class.
+        /// Initializes a new instance of the <see cref="Maybe{T}"/> class.
         /// </summary>
-        /// <value>
-        /// The empty instance.
-        /// </value>
-        public static Maybe<T> Empty
+        /// <param name="explanations">The reasons for which the wrapper is empty.</param>
+        private Maybe(params Explanation[] explanations)
         {
-            get
-            {
-                return new Maybe<T>(new List<ValidationMessage>());
-            }
+            this.explanations = explanations;
         }
 
         /// <summary>
@@ -77,11 +71,6 @@ namespace GeekLearning.Domain
         {
             get
             {
-                if (!this.HasValue)
-                {
-                    throw new InvalidOperationException("The instance has no value.");
-                }
-
                 return this.value;
             }
         }
@@ -93,36 +82,11 @@ namespace GeekLearning.Domain
         /// The reasons for which the wrapper is empty.
         /// </value>
         /// <exception cref="System.InvalidOperationException">The instance has a value.</exception>
-        public IEnumerable<ValidationMessage> EmptyReasons
+        public IEnumerable<Explanation> Explanations
         {
             get
             {
-                if (this.HasValue)
-                {
-                    throw new InvalidOperationException("The instance has a value.");
-                }
-
-                return this.emptyReasons;
-            }
-        }
-
-        /// <summary>
-        /// Gets the concatenated reasons for which the wrapper is empty.
-        /// </summary>
-        /// <value>
-        /// The reason for which the wrapper is empty.
-        /// </value>
-        /// <exception cref="System.InvalidOperationException">The instance has a value.</exception>
-        public string EmptyReason
-        {
-            get
-            {
-                if (this.HasValue)
-                {
-                    throw new InvalidOperationException("The instance has a value.");
-                }
-
-                return string.Join(";", this.emptyReasons.Select(v => v.Message).ToArray());
+                return this.explanations;
             }
         }
 
@@ -136,26 +100,6 @@ namespace GeekLearning.Domain
             return new Maybe<T>(instance);
         }
 
-        /// <summary>
-        /// Gets an empty instance of the <see cref="Maybe{T}"/> class.
-        /// </summary>
-        /// <returns>An empty instance of the <see cref="Maybe{T}"/> class.</returns>
-        public static Maybe<T> GetEmptyInstance()
-        {
-            return new Maybe<T>(new List<ValidationMessage>());
-        }
-
-        /// <summary>
-        /// Gets an empty instance of the <see cref="Maybe{T}" /> class.
-        /// </summary>
-        /// <param name="emptyReason">The reason for which the wrapper is empty.</param>
-        /// <returns>
-        /// An empty instance of the <see cref="Maybe{T}" /> class.
-        /// </returns>
-        public static Maybe<T> GetEmptyInstance(string emptyReason)
-        {
-            return GetEmptyInstance(new List<string> { emptyReason });
-        }
 
         /// <summary>
         /// Gets an empty instance of the <see cref="Maybe{T}" /> class.
@@ -164,22 +108,23 @@ namespace GeekLearning.Domain
         /// <returns>
         /// An empty instance of the <see cref="Maybe{T}" /> class.
         /// </returns>
-        public static Maybe<T> GetEmptyInstance(IEnumerable<string> emptyReasons)
-        {
-            return GetEmptyInstance(emptyReasons.Select(e => new ValidationMessage(e)));
-        }
-
-        /// <summary>
-        /// Gets an empty instance of the <see cref="Maybe{T}" /> class.
-        /// </summary>
-        /// <param name="emptyReasons">The reasons for which the wrapper is empty.</param>
-        /// <returns>
-        /// An empty instance of the <see cref="Maybe{T}" /> class.
-        /// </returns>
-        public static Maybe<T> GetEmptyInstance(IEnumerable<ValidationMessage> emptyReasons)
+        public static Maybe<T> None(IEnumerable<Explanation> emptyReasons)
         {
             return new Maybe<T>(emptyReasons);
         }
+
+        /// <summary>
+        /// Gets an empty instance of the <see cref="Maybe{T}" /> class.
+        /// </summary>
+        /// <param name="emptyReasons">The reasons for which the wrapper is empty.</param>
+        /// <returns>
+        /// An empty instance of the <see cref="Maybe{T}" /> class.
+        /// </returns>
+        public static Maybe<T> None(params Explanation[] emptyReasons)
+        {
+            return new Maybe<T>(emptyReasons);
+        }
+
 
         /// <summary>
         /// Performs an explicit conversion from <see cref="Maybe{T}"/> to <typeparamref name="T"/>.
@@ -249,7 +194,35 @@ namespace GeekLearning.Domain
         /// <returns>An empty instance of <see cref="Maybe{TOther}"/>.</returns>
         public Maybe<TOther> ToEmpty<TOther>() where TOther : class
         {
-            return Maybe<TOther>.GetEmptyInstance(this.EmptyReasons);
+            return Maybe<TOther>.None(this.Explanations);
+        }
+    }
+
+    public static class Maybe
+    {
+        public static Maybe<object> None(params Explanation[] explanations)
+        {
+            return Maybe<object>.None(explanations);
+        }
+
+        public static Maybe<object> None(IEnumerable<Explanation> explanations)
+        {
+            return Maybe<object>.None(explanations);
+        }
+
+        public static Maybe<T> None<T>(params Explanation[] explanations) where T : class
+        {
+            return Maybe<T>.None(explanations);
+        }
+
+        public static Maybe<T> None<T>(IEnumerable<Explanation> explanations) where T : class
+        {
+            return Maybe<T>.None(explanations);
+        }
+
+        public static Maybe<T> Some<T>(T instance) where T : class
+        {
+            return Maybe<T>.Some(instance);
         }
     }
 }

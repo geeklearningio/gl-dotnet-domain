@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GeekLearning.Domain
+﻿namespace GeekLearning.Domain
 {
+    using System.Threading.Tasks;
+
     public interface IDomain
     {
         Task Commit();

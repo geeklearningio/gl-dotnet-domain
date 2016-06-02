@@ -6,8 +6,6 @@
 
 namespace GeekLearning.Domain.Exceptions
 {
-    using System;
-
     /// <summary>
     /// Exception thrown when someone try to access a dependency of an Aggregate that
     /// was not correctly loaded.
@@ -19,7 +17,7 @@ namespace GeekLearning.Domain.Exceptions
         /// </summary>
         /// <param name="dependencyName">Name of the dependency.</param>
         public AggregateInvalidAccessException(string dependencyName)
-            : base(string.Format("Invalid Aggregate Access Exception :  {0}", dependencyName))
+            : base(new Explanations.InvalidAggregateAccessExplanation(dependencyName))
         {
         }
     }
