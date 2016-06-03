@@ -156,6 +156,30 @@ namespace GeekLearning.Domain
         }
 
         /// <summary>
+        /// Performs an implicit conversion from <typeparamref name="T"/> to <see cref="Maybe{T}" />.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
+        public static implicit operator Maybe<T>(Explanation value) 
+        {
+            return new Maybe<T>(value);
+        }
+
+        /// <summary>
+        /// Performs an implicit conversion from <typeparamref name="T"/> to <see cref="Maybe{T}" />.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the conversion.
+        /// </returns>
+        public static implicit operator Maybe<T>(Explanation[] value)
+        {
+            return new Maybe<T>(value);
+        }
+
+        /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
