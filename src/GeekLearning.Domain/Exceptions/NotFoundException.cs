@@ -11,7 +11,7 @@ namespace GeekLearning.Domain.Exceptions
     /// <summary>
     /// Defines a base class for all exceptions related to not found errors
     /// </summary>
-    public abstract class NotFoundException : DomainException
+    public class NotFoundException : DomainException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NotFoundException"/> class.

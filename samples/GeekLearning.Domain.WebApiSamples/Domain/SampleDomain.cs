@@ -19,7 +19,8 @@ namespace GeekLearning.Domain.WebApiSamples.Domain
                 {
                     return Maybe.None<SampleAggregate>(new Explanations.NotFoundExplanation());
                 }
-                return Maybe.Some(new SampleAggregate());
+
+                return new SampleAggregate();
             }
         }
 
