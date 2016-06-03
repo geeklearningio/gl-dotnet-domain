@@ -36,7 +36,7 @@ namespace GeekLearning.Domain.AspnetCore
                         .Select(reason => new ResponseExplanation
                         {
                             Message = reason.Message,
-                            Type = reason.GetType().Name.Replace("Reason", ""),
+                            Type = reason.GetType().Name,
                             DebugData = isDebugEnabled ? reason.InternalMessage : null
                         }).ToArray(),
                     RequestId = requestIdProvider.RequestId
