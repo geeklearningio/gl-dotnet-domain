@@ -47,6 +47,26 @@ namespace GeekLearning.Domain
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Maybe{T}"/> class.
+        /// </summary>
+        /// <param name="explanations">The explanations ("Created" for example).</param>
+        private Maybe(T value, params Explanation[] explanations)
+            : this(value)
+        {
+            this.explanations = explanations;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Maybe{T}"/> class.
+        /// </summary>
+        /// <param name="explanations">The explanations ("Created" for example).</param>
+        private Maybe(T value, IEnumerable<Explanation> explanations)
+            : this(value)
+        {
+            this.explanations = explanations;
+        }
+
+        /// <summary>
         /// Gets a value indicating whether this instance has value.
         /// </summary>
         /// <value>
@@ -100,6 +120,27 @@ namespace GeekLearning.Domain
             return new Maybe<T>(instance);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Maybe{T}"/> class from a concrete instance.
+        /// </summary>
+        /// <param name="instance">The instance to wrap.</param>
+        /// <param name="explanations">The explanations ("Created" for example).</param>
+        /// <returns>A non-empty instance of the <see cref="Maybe{T}"/> class.</returns>
+        public static Maybe<T> Some(T instance, params Explanation[] explanations)
+        {
+            return new Maybe<T>(instance, explanations);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Maybe{T}"/> class from a concrete instance.
+        /// </summary>
+        /// <param name="instance">The instance to wrap.</param>
+        /// <param name="explanations">The explanations ("Created" for example).</param>
+        /// <returns>A non-empty instance of the <see cref="Maybe{T}"/> class.</returns>
+        public static Maybe<T> Some(T instance, IEnumerable<Explanation> explanations)
+        {
+            return new Maybe<T>(instance, explanations);
+        }
 
         /// <summary>
         /// Gets an empty instance of the <see cref="Maybe{T}" /> class.
@@ -247,6 +288,16 @@ namespace GeekLearning.Domain
         public static Maybe<T> Some<T>(T instance) where T : class
         {
             return Maybe<T>.Some(instance);
+        }
+
+        public static Maybe<T> Some<T>(T instance, params Explanation[] explanations) where T : class
+        {
+            return Maybe<T>.Some(instance, explanations);
+        }
+
+        public static Maybe<T> Some<T>(T instance, IEnumerable<Explanation> explanations) where T : class
+        {
+            return Maybe<T>.Some(instance, explanations);
         }
     }
 }

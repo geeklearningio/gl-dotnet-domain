@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GeekLearning.Domain.AspnetCore
 {
-    public static class GeekLearningDomainAspnetCoreExtensions
+    public static class AspnetCoreExtensions
     {
         public static IMvcBuilder AddDomain(this IMvcBuilder mvcBuilder)
         {

@@ -1,6 +1,7 @@
-﻿using System;
-namespace GeekLearning.Domain.Explanations
+﻿namespace GeekLearning.Domain.Explanations
 {
+    using System;
+
     public class NotFoundExplanation : Explanation
     {
         public NotFoundExplanation() : base("Aggregate was not found")

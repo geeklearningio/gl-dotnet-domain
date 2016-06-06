@@ -1,27 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GeekLearning.Domain.Explanations;
-
-namespace GeekLearning.Domain.AspnetCore.Internal
+﻿namespace GeekLearning.Domain.AspnetCore.Internal
 {
+    using Explanations;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+
     public class MaybeResultMapper
     {
         public int GetResult(IEnumerable<Explanation> explanations)
         {
-            if (explanations.Any())
+            if (!explanations.Any())
             {
-                if (explanations.Any(x=> x is NotFoundExplanation))
-                {
-                    return 404;
-                }
-                return 500;
+                return (int)HttpStatusCode.OK;
             }
-            else
+
+            if (explanations.All(x => x is UpdatedExplanation))
             {
-                return 200;
+                return (int)HttpStatusCode.OK;
             }
+
+            if (explanations.All(x => x is CreatedExplanation))
+            {
+                return (int)HttpStatusCode.Created;
+            }
+
+            if (explanations.All(x => x is DeletedExplanation))
+            {
+                return (int)HttpStatusCode.NoContent;
+            }
+
+            if (explanations.Any(x => x is NotFoundExplanation))
+            {
+                return (int)HttpStatusCode.NotFound;
+            }
+
+            return (int)HttpStatusCode.InternalServerError;
         }
     }
 }
