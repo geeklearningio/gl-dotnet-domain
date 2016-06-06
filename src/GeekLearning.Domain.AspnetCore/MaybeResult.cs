@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GeekLearning.Domain.AspnetCore
+﻿namespace GeekLearning.Domain.AspnetCore
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Routing;
+    using Microsoft.AspNetCore.Routing;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Options;
+    using Microsoft.Net.Http.Headers;
+    using System;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+
     public class MaybeResult<T> : ObjectResult where T : class
     {
         private Maybe<T> maybe;
@@ -18,7 +20,22 @@ namespace GeekLearning.Domain.AspnetCore
             this.maybe = maybe;
         }
 
+        public MaybeResult(Maybe<T> maybe, object routeValues) : this(maybe)
+        {
+            this.RouteValues = routeValues == null ? null : new RouteValueDictionary(routeValues);
+        }
+
         public Maybe<T> Maybe { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="IUrlHelper" /> used to generate URLs.
+        /// </summary>
+        public IUrlHelper UrlHelper { get; set; }
+
+        /// <summary>
+        /// Gets or sets the route data to use for generating the URL.
+        /// </summary>
+        public RouteValueDictionary RouteValues { get; set; }
 
         public override Task ExecuteResultAsync(ActionContext context)
         {
@@ -26,26 +43,62 @@ namespace GeekLearning.Domain.AspnetCore
             var requestIdProvider = context.HttpContext.RequestServices.GetRequiredService<IRequestIdProvider>();
             var options = context.HttpContext.RequestServices.GetRequiredService<IOptions<DomainOptions>>();
             bool isDebugEnabled = options.Value.Debug;
-            var response = new Response<T>
-            {
-                Content = this.maybe.Value,
-                Status = new ReponseStatus
-                {
-                    Code = resultMapper.GetResult(this.maybe.Explanations),
-                    Reasons = (this.maybe.Explanations ?? Enumerable.Empty<Explanations.Explanation>())
-                        .Select(reason => new ResponseExplanation
-                        {
-                            Message = reason.Message,
-                            Type = reason.GetType().Name,
-                            DebugData = isDebugEnabled ? reason.InternalMessage : null
-                        }).ToArray(),
-                    RequestId = requestIdProvider.RequestId
-                }
-            };
 
-            this.StatusCode = response.Status.Code;
-            this.Value = response;
+            this.StatusCode = resultMapper.GetResult(this.maybe.Explanations);
+
+            if (this.StatusCode != (int)HttpStatusCode.NoContent)
+            {
+                this.Value = new Response<T>
+                {
+                    Content = this.maybe.Value,
+                    Status = new ReponseStatus
+                    {
+                        Code = this.StatusCode.Value,
+                        Reasons = (this.maybe.Explanations ?? Enumerable.Empty<Explanations.Explanation>())
+                            .Select(reason => new ResponseExplanation
+                            {
+                                Message = reason.Message,
+                                Type = reason.GetType().Name,
+                                DebugData = isDebugEnabled ? reason.InternalMessage : null
+                            }).ToArray(),
+                        RequestId = requestIdProvider.RequestId
+                    }
+                };
+            }
+
             return base.ExecuteResultAsync(context);
+        }
+
+        /// <inheritdoc />
+        public override void OnFormatting(ActionContext context)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            base.OnFormatting(context);
+
+            if (this.RouteValues == null)
+            {
+                return;
+            }
+
+            var urlHelper = this.UrlHelper;
+            if (urlHelper == null)
+            {
+                var services = context.HttpContext.RequestServices;
+                urlHelper = services.GetRequiredService<IUrlHelperFactory>().GetUrlHelper(context);
+            }
+
+            var url = urlHelper.Link(null, this.RouteValues);
+
+            if (string.IsNullOrEmpty(url))
+            {
+                throw new InvalidOperationException("No route matches the supplied values.");
+            }
+
+            context.HttpContext.Response.Headers[HeaderNames.Location] = url;
         }
     }
 }
