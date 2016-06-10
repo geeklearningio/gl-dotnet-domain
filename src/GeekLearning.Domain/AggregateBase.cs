@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GeekLearning.Domain
+﻿namespace GeekLearning.Domain
 {
     public abstract class AggregateBase<TDomain>: IAggregate
         where TDomain : IDomain

@@ -15,26 +15,20 @@
     {
         private Maybe<T> maybe;
 
-        public MaybeResult(Maybe<T> maybe) : base(null)
+        public MaybeResult(Maybe<T> maybe) 
+            : base(null)
         {
             this.maybe = maybe;
         }
 
-        public MaybeResult(Maybe<T> maybe, object routeValues) : this(maybe)
+        public MaybeResult(Maybe<T> maybe, object routeValues) 
+            : this(maybe)
         {
             this.RouteValues = routeValues == null ? null : new RouteValueDictionary(routeValues);
         }
 
-        public Maybe<T> Maybe { get; set; }
-
-        /// <summary>
-        /// Gets or sets the <see cref="IUrlHelper" /> used to generate URLs.
-        /// </summary>
         public IUrlHelper UrlHelper { get; set; }
 
-        /// <summary>
-        /// Gets or sets the route data to use for generating the URL.
-        /// </summary>
         public RouteValueDictionary RouteValues { get; set; }
 
         public override Task ExecuteResultAsync(ActionContext context)
@@ -44,7 +38,8 @@
             var options = context.HttpContext.RequestServices.GetRequiredService<IOptions<DomainOptions>>();
             bool isDebugEnabled = options.Value.Debug;
 
-            this.StatusCode = resultMapper.GetResult(this.maybe.Explanations);
+            this.StatusCode = resultMapper.GetResult(this.maybe.Explanation);
+            context.HttpContext.Response.Headers.Add("x-request-id", requestIdProvider.RequestId);
 
             if (this.StatusCode != (int)HttpStatusCode.NoContent)
             {
@@ -54,14 +49,8 @@
                     Status = new ReponseStatus
                     {
                         Code = this.StatusCode.Value,
-                        Reasons = (this.maybe.Explanations ?? Enumerable.Empty<Explanations.Explanation>())
-                            .Select(reason => new ResponseExplanation
-                            {
-                                Message = reason.Message,
-                                Type = reason.GetType().Name,
-                                DebugData = isDebugEnabled ? reason.InternalMessage : null
-                            }).ToArray(),
-                        RequestId = requestIdProvider.RequestId
+                        RequestId = requestIdProvider.RequestId,
+                        Explanation = ResponseExplanation.From(this.maybe.Explanation, isDebugEnabled),
                     }
                 };
             }
@@ -69,7 +58,6 @@
             return base.ExecuteResultAsync(context);
         }
 
-        /// <inheritdoc />
         public override void OnFormatting(ActionContext context)
         {
             if (context == null)

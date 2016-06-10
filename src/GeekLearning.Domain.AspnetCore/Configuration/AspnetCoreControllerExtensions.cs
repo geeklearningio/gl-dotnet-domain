@@ -19,12 +19,12 @@
         {
             if (!aggregate.HasValue)
             {
-                return new MaybeResult<TDataTransfer>(aggregate.ToEmpty<TDataTransfer>());
+                return new MaybeResult<TDataTransfer>(aggregate.Explanation);
             }
 
             var dataTransfer = dataTransferFromAggregate(aggregate.Value);
 
-            return new MaybeResult<TDataTransfer>(Domain.Maybe.Some(dataTransfer, aggregate.Explanations));
+            return new MaybeResult<TDataTransfer>(Domain.Maybe.Some(dataTransfer, aggregate.Explanation));
         }
 
         public static MaybeResult<IEnumerable<TDataTransfer>> Maybe<TAggregate, TDataTransfer>(
@@ -34,14 +34,14 @@
         {
             if (!aggregates.HasValue)
             {
-                return new MaybeResult<IEnumerable<TDataTransfer>>(aggregates.ToEmpty<IEnumerable<TDataTransfer>>());
+                return new MaybeResult<IEnumerable<TDataTransfer>>(aggregates.Explanation);
             }
 
             IEnumerable<TDataTransfer> dataTransfers = aggregates.Value
                 .Select(m => dataTransferFromAggregate(m))
                 .ToList();
 
-            return new MaybeResult<IEnumerable<TDataTransfer>>(Domain.Maybe.Some(dataTransfers, aggregates.Explanations));
+            return new MaybeResult<IEnumerable<TDataTransfer>>(Domain.Maybe.Some(dataTransfers, aggregates.Explanation));
         }
 
         public static MaybeResult<TDataTransfer> Maybe<TAggregate, TDataTransfer>(
@@ -52,13 +52,13 @@
         {
             if (!aggregate.HasValue)
             {
-                return new MaybeResult<TDataTransfer>(aggregate.ToEmpty<TDataTransfer>());
+                return new MaybeResult<TDataTransfer>(aggregate.Explanation);
             }
 
             var dataTransfer = dataTransferFromAggregate(aggregate.Value);
 
             return new MaybeResult<TDataTransfer>(
-                Domain.Maybe.Some(dataTransfer, aggregate.Explanations),
+                Domain.Maybe.Some(dataTransfer, aggregate.Explanation),
                 routeValues);
         }
     }

@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GeekLearning.Domain.AspnetCore
+﻿namespace GeekLearning.Domain.AspnetCore
 {
     public class DefaultRequestIdProvider : IRequestIdProvider
     {
         public DefaultRequestIdProvider()
         {
-            var idGen = new D64.TimebasedId(false);
-            this.RequestId = idGen.NewId();
+            var idGenerator = new D64.TimebasedId(false);
+            this.RequestId = idGenerator.NewId();
         }
 
-        public string RequestId
-        {
-            get;
-        }
+        public string RequestId { get; }
     }
 }

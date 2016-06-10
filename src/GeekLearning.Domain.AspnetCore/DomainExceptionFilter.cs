@@ -1,9 +1,9 @@
 ﻿namespace GeekLearning.Domain.AspnetCore
 {
-    using System;
     using Microsoft.AspNetCore.Mvc.Filters;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
+
     public class DomainExceptionFilter : IActionFilter
     {
         private ILoggerFactory loggerFactory;
@@ -19,21 +19,21 @@
         {
             if (context.Exception != null)
             {
-                var domainException = context.Exception as Exceptions.DomainException;
+                var domainException = context.Exception as DomainException;
                 var logger = this.loggerFactory.CreateLogger<DomainExceptionFilter>();
                 if (domainException == null)
                 {
                     logger.LogError(new EventId(1, "Unknown error"), context.Exception.Message, context.Exception);
-                    domainException = new Exceptions.UnknownException(context.Exception);
+                    domainException = new Explanations.Unknown().AsException(context.Exception);
                 }
-                context.Result = new MaybeResult<object>(Maybe.None(domainException.Explanations));
+
+                context.Result = new MaybeResult<object>(Maybe.None(domainException.Explanation));
                 context.ExceptionHandled = true;
             }
         }
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿namespace GeekLearning.Domain
 {
-    using Exceptions;
-    using System.Linq;
     using System.Threading.Tasks;
 
     public static class MaybeExtensions
@@ -15,7 +13,7 @@
         {
             if (!maybe.HasValue)
             {
-                throw new DomainException(maybe.Explanations.ToArray());
+                throw new DomainException(maybe.Explanation);
             }
 
             return maybe;

@@ -6,6 +6,6 @@
 
         public string RequestId { get; set; }
 
-        public ResponseExplanation[] Reasons { get; set; }
+        public ResponseExplanation Explanation { get; set; }
     }
 }
