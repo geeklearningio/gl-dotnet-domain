@@ -1,40 +1,53 @@
 ﻿namespace GeekLearning.Domain.AspnetCore.Internal
 {
     using Explanations;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Net;
 
     public class MaybeResultMapper
     {
-        public int GetResult(IEnumerable<Explanation> explanations)
+        public int GetResult(Explanation explanation)
         {
-            if (!explanations.Any())
+            return (int)GetHttpStatusCodeResult(explanation);
+        }
+
+        private static HttpStatusCode GetHttpStatusCodeResult(Explanation explanation)
+        {
+            if (explanation == null)
             {
-                return (int)HttpStatusCode.OK;
+                return HttpStatusCode.OK;
             }
 
-            if (explanations.All(x => x is UpdatedExplanation))
+            if (explanation.GetType().IsSubclassOfRawGeneric(typeof(Updated<>)))
             {
-                return (int)HttpStatusCode.OK;
+                return HttpStatusCode.OK;
             }
 
-            if (explanations.All(x => x is CreatedExplanation))
+            if (explanation.GetType().IsSubclassOfRawGeneric(typeof(Created<>)))
             {
-                return (int)HttpStatusCode.Created;
+                return HttpStatusCode.Created;
             }
 
-            if (explanations.All(x => x is DeletedExplanation))
+            if (explanation.GetType().IsSubclassOfRawGeneric(typeof(Deleted<>)))
             {
-                return (int)HttpStatusCode.NoContent;
+                return HttpStatusCode.NoContent;
             }
 
-            if (explanations.Any(x => x is NotFoundExplanation))
+            if (explanation.GetType().IsSubclassOfRawGeneric(typeof(NotFound<>)))
             {
-                return (int)HttpStatusCode.NotFound;
+                return HttpStatusCode.NotFound;
             }
 
-            return (int)HttpStatusCode.InternalServerError;
+            if (explanation.GetType().IsSubclassOfRawGeneric(typeof(Validation<>)))
+            {
+                return HttpStatusCode.BadRequest;
+            }
+
+            if (explanation is ShouldProvideIdentity)
+            {
+                return HttpStatusCode.Unauthorized;
+            }
+
+            return HttpStatusCode.InternalServerError;
         }
     }
 }

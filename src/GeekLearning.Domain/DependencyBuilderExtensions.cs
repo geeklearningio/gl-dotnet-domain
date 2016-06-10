@@ -1,6 +1,6 @@
 ﻿namespace GeekLearning.Domain
 {
-    using GeekLearning.Domain.Exceptions;
+    using Explanations;
     using System;
 
     public static class DependencyBuilderExtensions
@@ -10,7 +10,7 @@
         {
             if (source == null)
             {
-                return new Lazy<TResult>(() => { throw new AggregateInvalidAccessException(dependencyName); });
+                return new Lazy<TResult>(() => { throw new InvalidAggregateAccess<TAggregate>(dependencyName).AsException(); });
             }
             else
             {
@@ -23,7 +23,7 @@
         {
             if (source == null)
             {
-                return new Lazy<TDependency>(() => { throw new AggregateInvalidAccessException(dependencyName); });
+                return new Lazy<TDependency>(() => { throw new InvalidAggregateAccess<TAggregate>(dependencyName).AsException(); });
             }
             else
             {

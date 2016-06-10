@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace GeekLearning.Domain.AspnetCore
+﻿namespace GeekLearning.Domain.AspnetCore
 {
+    using Microsoft.Extensions.DependencyInjection;
+
     public static class AspnetCoreExtensions
     {
         public static IMvcBuilder AddDomain(this IMvcBuilder mvcBuilder)
