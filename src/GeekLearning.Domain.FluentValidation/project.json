@@ -1,0 +1,22 @@
+{
+  "version": "0.0.1-*",
+  "description": "GeekLearning.Domain FluentValidation plugin",
+  "authors": [ "Geek Learning", "Adrien Siffermann", "Cyprien Autexier" ],
+  "packOptions": {
+    "tags": [ ],
+    "projectUrl": "",
+    "licenseUrl": ""
+  },
+  "dependencies": {
+    "NETStandard.Library": "1.5.0-rc2-24027",
+    "FluentValidation": "6.2.1",
+    "GeekLearning.Domain": "*"
+  },
+
+  "frameworks": {
+    "net451": { },
+    "netstandard1.5": {
+      "imports": [ "dotnet", "dnxcore50", "portable-net45+win8" ]
+    }
+  }
+}
