@@ -1,15 +1,14 @@
 ﻿namespace GeekLearning.Domain
 {
-    public abstract class AggregateBase<TDomain>: IAggregate
-        where TDomain : IDomain
+    public abstract class AggregateBase<TDomain, TUser> : IAggregate
+        where TDomain : IDomain<TUser>
+        where TUser : class, IAggregate
     {
-        private readonly TDomain domain;
-
         public AggregateBase(TDomain domain)
         {
-            this.domain = domain;
+            this.Domain = domain;
         }
 
-        protected TDomain Domain { get { return this.domain; } }
+        protected TDomain Domain { get; }
     }
 }

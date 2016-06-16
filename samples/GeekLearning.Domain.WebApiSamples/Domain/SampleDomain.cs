@@ -11,13 +11,13 @@ namespace GeekLearning.Domain.WebApiSamples.Domain
         {
             if (throwNow)
             {
-                throw new Exceptions.DomainException(new Explanations.InvalidAggregateAccessExplanation("SomeDependency"));
+                throw new Explanations.InvalidAggregateAccess<SampleAggregate>("SomeDependency").AsException();
             }
             else
             {
                 if (id > 5)
                 {
-                    return Maybe.None<SampleAggregate>(new Explanations.NotFoundExplanation());
+                    return new Explanations.NotFound<SampleAggregate>();
                 }
 
                 return new SampleAggregate();

@@ -27,7 +27,7 @@
                     domainException = new Explanations.Unknown().AsException(context.Exception);
                 }
 
-                context.Result = new MaybeResult<object>(Maybe.None(domainException.Explanation));
+                context.Result = new MaybeResult<object>(domainException.Explanation);
                 context.ExceptionHandled = true;
             }
         }

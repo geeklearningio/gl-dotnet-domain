@@ -42,11 +42,6 @@
             return new Maybe<T>(instance, explanation);
         }
 
-        public static Maybe<T> None(Explanation explanation)
-        {
-            return new Maybe<T>(explanation);
-        }
-
         public static explicit operator T(Maybe<T> value)
         {
             if (value.HasValue)
@@ -90,16 +85,6 @@
 
     public static class Maybe
     {
-        public static Maybe<object> None(Explanation explanation)
-        {
-            return Maybe<object>.None(explanation);
-        }
-
-        public static Maybe<T> None<T>(Explanation explanation) where T : class
-        {
-            return Maybe<T>.None(explanation);
-        }
-
         public static Maybe<T> Some<T>(T instance) where T : class
         {
             return Maybe<T>.Some(instance);
