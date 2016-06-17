@@ -4,7 +4,7 @@
 
     public class ValidationFailure<TAggregate> : Explanation
     {
-        internal ValidationFailure(IValidationFailure failure)
+        public ValidationFailure(IValidationFailure failure)
             : base(failure.ToString(), $"AggregateType : { typeof(TAggregate).FullName }")
         {
         }

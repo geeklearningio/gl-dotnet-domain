@@ -42,6 +42,11 @@
                 return HttpStatusCode.BadRequest;
             }
 
+            if (explanation is Duplicated)
+            {
+                return HttpStatusCode.Conflict;
+            }
+
             if (explanation is ShouldProvideIdentity)
             {
                 return HttpStatusCode.Unauthorized;

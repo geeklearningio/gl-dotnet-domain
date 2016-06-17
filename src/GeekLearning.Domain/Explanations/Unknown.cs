@@ -1,9 +1,17 @@
-﻿namespace GeekLearning.Domain.Explanations
+﻿
+namespace GeekLearning.Domain.Explanations
 {
+    using System;
+
     public class Unknown : Explanation
     {
-        public Unknown() 
+        public Unknown()
             : base("An unknown error has happened")
+        {
+        }
+
+        public Unknown(Exception exception)
+          : base("An unknown error has happened", exception.ToString())
         {
         }
     }

@@ -27,7 +27,7 @@
             return this.validatorFactory.GetValidator(validatableAggregateType);
         }
 
-        public async Task Commit()
+        public async Task CommitAsync()
         {
             await this.InnerCommitAsync();
         }

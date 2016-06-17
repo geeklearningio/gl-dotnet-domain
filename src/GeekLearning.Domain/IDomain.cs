@@ -4,6 +4,6 @@
 
     public interface IDomain
     {
-        Task Commit();
+        Task CommitAsync();
     }
 }
