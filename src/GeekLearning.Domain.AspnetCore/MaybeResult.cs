@@ -34,12 +34,11 @@
         public override Task ExecuteResultAsync(ActionContext context)
         {
             var resultMapper = context.HttpContext.RequestServices.GetRequiredService<Internal.MaybeResultMapper>();
-            var requestIdProvider = context.HttpContext.RequestServices.GetRequiredService<IRequestIdProvider>();
             var options = context.HttpContext.RequestServices.GetRequiredService<IOptions<DomainOptions>>();
             bool isDebugEnabled = options.Value.Debug;
 
             this.StatusCode = resultMapper.GetResult(this.maybe.Explanation);
-            context.HttpContext.Response.Headers.Add("x-request-id", requestIdProvider.RequestId);
+            context.HttpContext.Response.Headers.Add("x-request-id", context.HttpContext.TraceIdentifier);
 
             if (this.StatusCode != (int)HttpStatusCode.NoContent)
             {
@@ -49,7 +48,7 @@
                     Status = new ReponseStatus
                     {
                         Code = this.StatusCode.Value,
-                        RequestId = requestIdProvider.RequestId,
+                        RequestId = context.HttpContext.TraceIdentifier,
                         Explanation = ResponseExplanation.From(this.maybe.Explanation, isDebugEnabled),
                     }
                 };

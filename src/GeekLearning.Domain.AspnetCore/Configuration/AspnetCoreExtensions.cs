@@ -8,7 +8,6 @@
         {
             mvcBuilder.AddMvcOptions(options => options.Filters.Add(typeof(DomainExceptionFilter)));
             mvcBuilder.Services.AddTransient<Internal.MaybeResultMapper>();
-            mvcBuilder.Services.AddScoped<IRequestIdProvider, DefaultRequestIdProvider>();
             return mvcBuilder;
         }
     }

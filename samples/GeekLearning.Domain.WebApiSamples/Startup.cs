@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using GeekLearning.Domain.AspnetCore;
+using Microsoft.AspNetCore.Http;
 
 namespace GeekLearning.Domain.WebApiSamples
 {
@@ -30,7 +31,7 @@ namespace GeekLearning.Domain.WebApiSamples
         {
             // Add framework services.
             services.AddMvc().AddDomain();
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<Domain.SampleDomain>();
         }
 

@@ -24,7 +24,7 @@ namespace GeekLearning.Domain.WebApiSamples.Domain
             }
         }
 
-        public Task Commit()
+        public Task CommitAsync()
         {
             return Task.FromResult(true);
         }
