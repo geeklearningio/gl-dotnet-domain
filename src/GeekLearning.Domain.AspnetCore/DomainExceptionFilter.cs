@@ -23,7 +23,7 @@
                 var logger = this.loggerFactory.CreateLogger<DomainExceptionFilter>();
                 if (domainException == null)
                 {
-                    logger.LogError(new EventId(1, "Unknown error"), context.Exception.Message, context.Exception);
+                    logger.LogError(new EventId(1, "Unknown error"), context.Exception, context.Exception.Message);
                     domainException = new Explanations.Unknown().AsException(context.Exception);
                 }
 
