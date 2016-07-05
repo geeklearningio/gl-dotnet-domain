@@ -1,20 +1,19 @@
 ﻿{
   "version": "0.0.1-*",
-  "description": "GeekLearning.Domain Class Library",
+  "description": "Library to help implement the Domain Driven Design.",
   "authors": [ "Geek Learning", "Adrien Siffermann", "Cyprien Autexier" ],
   "packOptions": {
-    "tags": [ ],
+    "tags": [],
     "projectUrl": "",
     "licenseUrl": ""
   },
+
   "dependencies": {
-    "NETStandard.Library": "1.5.0-rc2-24027"
+    "NETStandard.Library": "1.6.0"
   },
 
   "frameworks": {
-    "net451": { },
-    "netstandard1.5": {
-      "imports": [ "dotnet", "dnxcore50", "portable-net45+win8" ]
-    }
+    "net452": {},
+    "netstandard1.1": {}
   }
 }
