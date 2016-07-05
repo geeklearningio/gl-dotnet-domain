@@ -1,0 +1,21 @@
+{
+  "version": "0.0.1-*",
+  "description": "Plugin to use FluentValidation as the validation layer for GeekLearning.Domain.",
+  "authors": [ "Geek Learning", "Adrien Siffermann", "Cyprien Autexier" ],
+  "packOptions": {
+    "tags": [],
+    "projectUrl": "",
+    "licenseUrl": ""
+  },
+
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+    "FluentValidation": "6.4.0-beta3",
+    "GeekLearning.Domain": "*"
+  },
+
+  "frameworks": {
+    "net452": {},
+    "netstandard1.1": {}
+  }
+}

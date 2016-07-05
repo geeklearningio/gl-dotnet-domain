@@ -1,0 +1,19 @@
+﻿{
+  "version": "0.0.1-*",
+  "description": "Library to help implement the Domain Driven Design.",
+  "authors": [ "Geek Learning", "Adrien Siffermann", "Cyprien Autexier" ],
+  "packOptions": {
+    "tags": [],
+    "projectUrl": "",
+    "licenseUrl": ""
+  },
+
+  "dependencies": {
+    "NETStandard.Library": "1.6.0"
+  },
+
+  "frameworks": {
+    "net452": {},
+    "netstandard1.1": {}
+  }
+}
