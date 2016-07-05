@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GeekLearning.Domain.WebApiSamples.Domain
+﻿namespace GeekLearning.Domain.WebApiSamples
 {
+    using System.Threading.Tasks;
+
     public class SampleDomain : IDomain
     {
         public Maybe<SampleAggregate> GetSomeData(int id, bool throwNow)
