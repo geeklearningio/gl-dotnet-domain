@@ -1,10 +1,6 @@
-﻿namespace GeekLearning.Domain.WebApiSamples.Controllers
+﻿namespace GeekLearning.Domain.WebSamples.Controllers.Api
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using GeekLearning.Domain.AspnetCore;
+    using AspnetCore;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]

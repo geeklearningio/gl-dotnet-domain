@@ -1,4 +1,4 @@
-﻿namespace GeekLearning.Domain.WebApiSamples
+﻿namespace GeekLearning.Domain.WebSamples
 {
     public class SampleAggregate : IAggregate
     {

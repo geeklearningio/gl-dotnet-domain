@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using GeekLearning.Domain.AspnetCore;
 using Microsoft.AspNetCore.Http;
+using GeekLearning.Domain.AspnetCore;
 
-namespace GeekLearning.Domain.WebApiSamples
+namespace GeekLearning.Domain.WebSamples
 {
     public class Startup
     {
@@ -41,7 +41,24 @@ namespace GeekLearning.Domain.WebApiSamples
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseMvc();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+
+            app.UseStaticFiles();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }

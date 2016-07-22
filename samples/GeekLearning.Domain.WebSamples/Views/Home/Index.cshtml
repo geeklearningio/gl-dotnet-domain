@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>API Tests.</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="id" class="col-md-6 control-label">ID</label>
+            <div class="col-md-6">
+                <input id="id" type="number" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="throwNow" class="col-md-6 control-label">Throw Now ?</label>
+            <div class="col-md-6">
+                <input id="throwNow" type="checkbox" />
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+        <div class="form-group">
+            <div class="col-sm-6 col-sm-offset-6">
+                <button id="btn-test-api" class="btn btn-primary btn-sm">Test API</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <pre id="result-pre" style="height: 400px;"></pre>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btn-test-api').click(function () {
+                var id = $('#id').val();
+                var throwNow = $('#throwNow').is(":checked");
+
+                $.get('/api/values', { id: id, throwNow: throwNow }, function (data) {
+                    $('#result-pre').text(JSON.stringify(data, null, 4));
+                })
+                .fail(function (error) {
+                    $('#result-pre').text(JSON.stringify(error.responseJSON, null, 4));
+                });
+            });
+        });
+    </script>
+}

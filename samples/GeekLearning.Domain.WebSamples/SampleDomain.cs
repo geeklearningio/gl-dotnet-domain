@@ -1,4 +1,4 @@
-﻿namespace GeekLearning.Domain.WebApiSamples
+﻿namespace GeekLearning.Domain.WebSamples
 {
     using System.Threading.Tasks;
 
@@ -8,7 +8,7 @@
         {
             if (throwNow)
             {
-                throw new Explanations.InvalidAggregateAccess<SampleAggregate>("SomeDependency").AsException();
+                throw new Explanations.ShouldProvideIdentity().AsException();
             }
             else
             {

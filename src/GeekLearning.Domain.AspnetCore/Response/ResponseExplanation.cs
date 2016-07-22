@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Reflection;
     using System.Text;
+
     public class ResponseExplanation
     {
         public string Message { get; set; }
@@ -48,18 +49,21 @@
         {
             var typeInfo = type.GetTypeInfo();
             if (!type.GetTypeInfo().IsGenericType)
+            {
                 return type.Name;
+            }
 
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.Append(type.Name.Substring(0, type.Name.IndexOf('`')));
             sb.Append('<');
-            bool appendComma = false;
+            var appendComma = false;
             foreach (Type arg in type.GetGenericArguments())
             {
                 if (appendComma) sb.Append(',');
                 sb.Append(GetRealTypeName(arg));
                 appendComma = true;
             }
+
             sb.Append('>');
             return sb.ToString();
         }
