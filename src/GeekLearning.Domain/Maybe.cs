@@ -4,9 +4,11 @@
 
     public class Maybe<T> where T : class
     {
+        private T value;
+
         private Maybe(T value)
         {
-            this.Value = value;
+            this.value = value;
         }
 
         private Maybe(Explanation explanation)
@@ -20,7 +22,17 @@
             this.Explanation = explanation;
         }
 
-        public T Value { get; }
+        public T Value
+        {
+            get
+            {
+                if (this.value == null)
+                {
+                     throw new DomainException(this.Explanation);
+                }
+                return value;
+            }
+        }
 
         public Explanation Explanation { get; }
 
@@ -28,7 +40,7 @@
         {
             get
             {
-                return this.Value != null;
+                return this.value != null;
             }
         }
 
@@ -60,6 +72,17 @@
         public static implicit operator Maybe<T>(Explanation explanation)
         {
             return new Maybe<T>(explanation);
+        }
+
+        public override bool Equals(object obj)
+        {
+            var otherMaybe = obj as Maybe<T>;
+            if (otherMaybe.HasValue != !this.HasValue)
+            {
+                return false;
+            }
+
+            return this.value == otherMaybe.value;
         }
 
         public override int GetHashCode()
