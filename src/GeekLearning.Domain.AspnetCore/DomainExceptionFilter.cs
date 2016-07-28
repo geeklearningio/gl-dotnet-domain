@@ -70,6 +70,7 @@
 
             var acceptableMediaTypes = this.GetAcceptableMediaTypes(context.HttpContext.Request)
                 .Where(mt => mt.Quality == 1)
+                .Where(mt => mt.MediaType.Value != "*/*")
                 .ToList();
 
             if (acceptableMediaTypes.Any())
