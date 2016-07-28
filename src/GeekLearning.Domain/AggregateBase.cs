@@ -1,8 +1,7 @@
 ﻿namespace GeekLearning.Domain
 {
-    public abstract class AggregateBase<TDomain, TUser> : IAggregate
-        where TDomain : IDomain<TUser>
-        where TUser : class, IAggregate
+    public abstract class AggregateBase<TDomain> : IAggregate
+        where TDomain : IDomain
     {
         public AggregateBase(TDomain domain)
         {

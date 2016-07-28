@@ -3,7 +3,7 @@
     using Domain;
     using System.Threading.Tasks;
 
-    public abstract class ValidatableAggregateBase<TDomain, TUser, TValidator> : AggregateBase<TDomain, TUser>, IValidatableAggregate
+    public abstract class ValidatableAggregateBase<TDomain, TUser, TValidator> : AggregateBase<TDomain>, IValidatableAggregate
         where TDomain : ValidatableDomainBase<TUser>
         where TUser : class, IAggregate
         where TValidator: IValidator

@@ -3,6 +3,7 @@
     using Domain;
     using System;
     using System.Threading.Tasks;
+    using System.Security.Claims;
 
     public abstract class ValidatableDomainBase<TUser> : IDomain<TUser>
         where TUser : class, IAggregate
@@ -16,7 +17,7 @@
             this.validatorFactory = validatorFactory;
         }
 
-        public IValidator GetValidator<TAggregate>() 
+        public IValidator GetValidator<TAggregate>()
             where TAggregate : IValidatableAggregate
         {
             return this.validatorFactory.GetValidator<TAggregate>();
@@ -33,5 +34,11 @@
         }
 
         protected abstract Task InnerCommitAsync();
+
+        public abstract void As(TUser user);
+
+        public abstract void AsAnonymous();
+
+        public abstract void As(ClaimsPrincipal principal);
     }
 }
