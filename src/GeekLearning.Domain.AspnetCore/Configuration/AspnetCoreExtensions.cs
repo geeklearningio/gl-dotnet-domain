@@ -16,18 +16,18 @@
             return mvcBuilder;
         }
 
-        public static IServiceCollection AddDomain<TDomain>(this IServiceCollection services, ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
-          where TDomain : IDomain
+        public static IServiceCollection AddDomain<TDomain>(this IServiceCollection services)
+          where TDomain : class, IDomain
         {
-            services.TryAdd(new ServiceDescriptor(typeof(TDomain), typeof(TDomain), serviceLifetime));
+            services.TryAddScoped<TDomain>();
             return services;
         }
 
-        public static IServiceCollection AddIdentityDomain<TIdentityDomain>(this IServiceCollection services, ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
-            where TIdentityDomain : IIdentityDomain
+        public static IServiceCollection AddIdentityDomain<TIdentityDomain>(this IServiceCollection services)
+            where TIdentityDomain : class, IIdentityDomain
         {
-            AddDomain<TIdentityDomain>(services, serviceLifetime);
-            services.TryAddEnumerable(new ServiceDescriptor(typeof(IIdentityDomain), serviceProvider => serviceProvider.GetRequiredService<TIdentityDomain>(), serviceLifetime));
+            AddDomain<TIdentityDomain>(services);
+            services.TryAddEnumerable(new ServiceCollection().AddScoped<IIdentityDomain, TIdentityDomain>((provider) => provider.GetRequiredService<TIdentityDomain>()));
             return services;
         }
     }
