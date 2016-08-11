@@ -44,10 +44,14 @@
             var domainException = context.Exception as DomainException;
             if (domainException == null)
             {
+                this.logger.LogError(new EventId(1), context.Exception, context.Exception.Message);
                 domainException = new Explanations.Unknown().AsException(context.Exception);
             }
+            else
+            {
+                this.logger.LogError(new EventId(1), domainException, domainException.Explanation.Message);
+            }
 
-            this.logger.LogError(new EventId(1), domainException, domainException.Explanation.Message);
 
             var maybeResult = new MaybeResult<object>(domainException.Explanation);
             var mvcError = !this.HasOutputFormatterForAcceptHeaders(context, maybeResult);
