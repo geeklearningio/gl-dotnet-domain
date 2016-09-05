@@ -39,26 +39,42 @@ namespace GeekLearning.Domain
             public static TFactory For(TDomain domain, TEntity entity)
             {
                 var factoryType = typeof(TFactory);
-                var constructor = factoryType.GetConstructors().Single(); //factory must have only one constructor
-                var parameters = constructor.GetParameters().Skip(2);//todo improve
+
+                ConstructorInfo constructorInfo;
+#if NET452
+                constructorInfo = factoryType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Single();
+#else
+                constructorInfo = System.Reflection.TypeExtensions.GetConstructors(factoryType, BindingFlags.Instance | BindingFlags.NonPublic).Single();
+#endif
+
+                var parameters = constructorInfo.GetParameters().Skip(2);//todo improve
                 var list = new List<object>() { domain, entity };
 
                 foreach (var item in parameters)
                 {
                     var returnType = item.ParameterType;
                     var genericTypeArgument = returnType.GenericTypeArguments.First();
-                    //assumes other arguments are aggregates
-                    var exceptionType = typeof(InvalidAggregateAccess<>).MakeGenericType(genericTypeArgument);
-                    var exception = Activator.CreateInstance(exceptionType, nameof(returnType.Name));
+                    var exceptionType = typeof(InvalidAggregateAccess<>).MakeGenericType(typeof(TAggregate));
+                    var exception = Activator.CreateInstance(exceptionType, returnType.Name);
                     var ex = Expression.Throw(Expression.Constant(exception, exceptionType), genericTypeArgument);
                     var delegateType = typeof(Func<>).MakeGenericType(returnType);
                     var expression = Expression.Lambda(returnType, ex).Compile();
                     list.Add(expression);
                 }
-                return Activator.CreateInstance(factoryType, list.ToArray()) as TFactory;
+                var res = constructorInfo.Invoke(list.ToArray());
+                return res as TFactory;
             }
 
-            public abstract TAggregate Build();
+            public virtual TAggregate Build()
+            {
+                ConstructorInfo constructorInfo;
+#if NET452
+                constructorInfo = typeof(TAggregate).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(TDomain), typeof(TEntity)}, null);
+#else
+                constructorInfo = System.Reflection.TypeExtensions.GetConstructors(typeof(TAggregate), BindingFlags.Instance | BindingFlags.NonPublic).Single();
+#endif   
+                return constructorInfo.Invoke(new object[] { Domain, Entity }) as TAggregate;
+            }
 
         }
     }
