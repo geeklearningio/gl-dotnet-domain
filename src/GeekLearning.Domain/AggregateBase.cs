@@ -35,16 +35,22 @@ namespace GeekLearning.Domain
                 Domain = domain;
                 Entity = entity;
             }
-  
+
             public static TFactory For(TDomain domain, TEntity entity)
             {
                 var factoryType = typeof(TFactory);
 
                 ConstructorInfo constructorInfo;
+                MethodInfo asexceptionMethod;
+                var exceptionType = typeof(InvalidAggregateAccess<>).MakeGenericType(typeof(TAggregate));
+
 #if NET452
                 constructorInfo = factoryType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Single();
+                asexceptionMethod = exceptionType.GetMethod("AsException", new Type[0], new ParameterModifier[0]);
+
 #else
                 constructorInfo = System.Reflection.TypeExtensions.GetConstructors(factoryType, BindingFlags.Instance | BindingFlags.NonPublic).Single();
+                asexceptionMethod = System.Reflection.TypeExtensions.GetMethod(exceptionType, "AsException", new Type[0]);
 #endif
 
                 var parameters = constructorInfo.GetParameters().Skip(2);//todo improve
@@ -54,9 +60,9 @@ namespace GeekLearning.Domain
                 {
                     var returnType = item.ParameterType;
                     var genericTypeArgument = returnType.GenericTypeArguments.First();
-                    var exceptionType = typeof(InvalidAggregateAccess<>).MakeGenericType(typeof(TAggregate));
                     var exception = Activator.CreateInstance(exceptionType, returnType.Name);
-                    var ex = Expression.Throw(Expression.Constant(exception, exceptionType), genericTypeArgument);
+                    var ex = Expression.Throw(Expression.Call(Expression.Constant(exception, exceptionType), asexceptionMethod), genericTypeArgument);
+
                     var delegateType = typeof(Func<>).MakeGenericType(returnType);
                     var expression = Expression.Lambda(returnType, ex).Compile();
                     list.Add(expression);
@@ -69,7 +75,7 @@ namespace GeekLearning.Domain
             {
                 ConstructorInfo constructorInfo;
 #if NET452
-                constructorInfo = typeof(TAggregate).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(TDomain), typeof(TEntity)}, null);
+                constructorInfo = typeof(TAggregate).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(TDomain), typeof(TEntity) }, null);
 #else
                 constructorInfo = System.Reflection.TypeExtensions.GetConstructors(typeof(TAggregate), BindingFlags.Instance | BindingFlags.NonPublic).Single();
 #endif   
