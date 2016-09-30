@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace GeekLearning.Domain.EntityFramework
 {
+    [Flags]
     public enum States
     {
         Stale = 0,
@@ -18,18 +19,19 @@ namespace GeekLearning.Domain.EntityFramework
     }
     public abstract class ContextDomainBase<T> : ValidatableDomainBase<T> where T : class, IAggregate
     {
-        public readonly DbContext Context;
-        private readonly IList<IValidatableAggregate> _aggregates;
+        public readonly DbContext DbContext;
+        private readonly IList<IContextAggregateBase> aggregates;
 
         public ContextDomainBase(DbContext context, IValidatorFactory validatorFactory) : base(validatorFactory)
         {
-            Context = context;
-            _aggregates = new List<IValidatableAggregate>();
+            this.DbContext = context;
+            this.aggregates = new List<IContextAggregateBase>();
         }
 
         protected override async Task InnerCommitAsync()
         {
-            foreach (var item in _aggregates)
+            var toValidate = aggregates.Where(s => s.State() != (States.Stale | States.Unchanged)).OfType<IValidatableAggregate>();
+            foreach (var item in toValidate)
             {
                 var res = await item.ValidateAsync();
                 if (!res.IsValid)
@@ -37,13 +39,13 @@ namespace GeekLearning.Domain.EntityFramework
                     throw new Explanations.Validation<IAggregate>(res).AsException();
                 }
             }
-            await Context.SaveChangesAsync();
+            await DbContext.SaveChangesAsync();
         }
-        public States StateFor(object o) => (States)Context.Entry(o).State;
+        public States StateFor(object o) => (States)DbContext.Entry(o).State;
 
-        public void Register(IValidatableAggregate aggregate)
+        public void Register(IContextAggregateBase aggregate)
         {
-            _aggregates.Add(aggregate);
+            aggregates.Add(aggregate);
         }
     }
 }
