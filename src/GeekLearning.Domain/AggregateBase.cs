@@ -8,20 +8,18 @@ using System.Reflection;
 
 namespace GeekLearning.Domain
 {
+   
     public abstract class AggregateBase<TDomain, TEntity> : IAggregate
         where TDomain : IDomain
         where TEntity : class
     {
         protected readonly TEntity Entity;
         protected readonly TDomain Domain;
-
         public AggregateBase(TDomain domain, TEntity entity)
         {
             Domain = domain;
             Entity = entity;
         }
-
-
         public abstract class Factory<TAggregate, TFactory>
             where TAggregate : AggregateBase<TDomain, TEntity>
             where TFactory : class
@@ -81,7 +79,6 @@ namespace GeekLearning.Domain
 #endif   
                 return constructorInfo.Invoke(new object[] { Domain, Entity }) as TAggregate;
             }
-
         }
     }
 }

@@ -4,25 +4,25 @@
 
     public class Maybe<T> where T : class
     {
-        private T value;
+        protected T value;
 
-        private Maybe(T value)
+        protected Maybe(T value)
         {
             this.value = value;
         }
 
-        private Maybe(Explanation explanation)
+        protected Maybe(Explanation explanation)
         {
             this.Explanation = explanation;
         }
 
-        private Maybe(T value, Explanation explanation)
+        protected Maybe(T value, Explanation explanation)
             : this(value)
         {
             this.Explanation = explanation;
         }
 
-        public T Value
+        public virtual T Value
         {
             get
             {
