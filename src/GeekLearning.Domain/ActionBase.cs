@@ -15,7 +15,7 @@ namespace GeekLearning.Domain
 
         protected TDomain Domain { get; }
 
-        protected void ThrowNotFoundIfNull<TKey>(TKey id, TEntity entity) where TKey:struct
+        protected void ThrowNotFoundIfNull<TKey>(TKey id, TEntity entity) where TKey : struct
         {
             if (entity == null)
             {

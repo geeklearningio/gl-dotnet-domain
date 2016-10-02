@@ -1,13 +1,12 @@
-﻿using GeekLearning.Domain.EntityFramework;
-using GeekLearning.Domain.Validation;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GeekLearning.Domain.EntityFramework
+﻿namespace GeekLearning.Domain.EntityFramework
 {
+    using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Validation;
+
     [Flags]
     public enum States
     {
@@ -17,6 +16,7 @@ namespace GeekLearning.Domain.EntityFramework
         ToBeModified = 3,
         ToBeCreated = 4
     }
+
     public abstract class ContextDomainBase<T> : ValidatableDomainBase<T> where T : class, IAggregate
     {
         public readonly DbContext DbContext;
@@ -41,6 +41,7 @@ namespace GeekLearning.Domain.EntityFramework
             }
             await DbContext.SaveChangesAsync();
         }
+
         public States StateFor(object o) => (States)DbContext.Entry(o).State;
 
         public void Register(IContextAggregateBase aggregate)

@@ -1,14 +1,12 @@
-﻿using GeekLearning.Domain;
-using GeekLearning.Domain.Explanations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-
-namespace GeekLearning.Domain
+﻿namespace GeekLearning.Domain
 {
-   
+    using Explanations;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
+
     public abstract class AggregateBase<TDomain, TEntity> : IAggregate
         where TDomain : IDomain
         where TEntity : class

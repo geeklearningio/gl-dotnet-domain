@@ -30,6 +30,7 @@
                 {
                     throw new DomainException(this.Explanation);
                 }
+
                 return value;
             }
         }

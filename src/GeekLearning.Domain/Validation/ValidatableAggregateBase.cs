@@ -2,12 +2,12 @@
 {
     using Domain;
     using System.Threading.Tasks;
-   
+
     public abstract class ValidatableAggregateBase<TDomain, TEntity, TUser, TValidator> : AggregateBase<TDomain, TEntity>, IValidatableAggregate
         where TDomain : ValidatableDomainBase<TUser>
         where TUser : class, IAggregate
         where TEntity : class
-        where TValidator: IValidator
+        where TValidator : IValidator
     {
         private readonly IValidator validator;
 
