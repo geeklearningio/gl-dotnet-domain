@@ -11,7 +11,7 @@ namespace GeekLearning.Domain.EntityFramework
     [Flags]
     public enum States
     {
-        Stale = 0,
+        Unknown = 0,
         Unchanged = 1,
         ToBeDeleted = 2,
         ToBeModified = 3,
@@ -30,7 +30,7 @@ namespace GeekLearning.Domain.EntityFramework
 
         protected override async Task InnerCommitAsync()
         {
-            var toValidate = aggregates.Where(s => s.State() != (States.Stale | States.Unchanged)).OfType<IValidatableAggregate>();
+            var toValidate = aggregates.Where(s => s.State() != (States.Unknown | States.Unchanged)).OfType<IValidatableAggregate>();
             foreach (var item in toValidate)
             {
                 var res = await item.ValidateAsync();
