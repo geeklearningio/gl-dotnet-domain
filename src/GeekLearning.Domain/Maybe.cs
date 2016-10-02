@@ -4,31 +4,31 @@
 
     public class Maybe<T> where T : class
     {
-        protected T value;
+        private T value;
 
-        protected Maybe(T value)
+        private Maybe(T value)
         {
             this.value = value;
         }
 
-        protected Maybe(Explanation explanation)
+        private Maybe(Explanation explanation)
         {
             this.Explanation = explanation;
         }
 
-        protected Maybe(T value, Explanation explanation)
+        private Maybe(T value, Explanation explanation)
             : this(value)
         {
             this.Explanation = explanation;
         }
 
-        public virtual T Value
+        public T Value
         {
             get
             {
                 if (this.value == null)
                 {
-                     throw new DomainException(this.Explanation);
+                    throw new DomainException(this.Explanation);
                 }
                 return value;
             }
