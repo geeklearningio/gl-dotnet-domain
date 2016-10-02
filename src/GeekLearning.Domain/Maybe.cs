@@ -28,8 +28,9 @@
             {
                 if (this.value == null)
                 {
-                     throw new DomainException(this.Explanation);
+                    throw new DomainException(this.Explanation);
                 }
+
                 return value;
             }
         }
