@@ -7,30 +7,44 @@
     using System.Linq.Expressions;
     using System.Reflection;
 
-    public abstract class AggregateBase<TDomain, TEntity> : IAggregate
+    public abstract class AggregateBase<TDomain> : IAggregate
+        where TDomain : IDomain
+    {
+        public AggregateBase(TDomain domain)
+        {
+            this.Domain = domain;
+        }
+
+        protected TDomain Domain { get; }
+    }
+
+    public abstract class AggregateBase<TDomain, TEntity> : AggregateBase<TDomain>
         where TDomain : IDomain
         where TEntity : class
     {
-        protected readonly TEntity Entity;
-        protected readonly TDomain Domain;
         public AggregateBase(TDomain domain, TEntity entity)
+            : base(domain)
         {
-            Domain = domain;
             Entity = entity;
         }
+
+        protected TEntity Entity { get; }
+
         public abstract class Factory<TAggregate, TFactory>
             where TAggregate : AggregateBase<TDomain, TEntity>
             where TFactory : class
         {
-            protected readonly TEntity Entity;
-            protected readonly TDomain Domain;
+            protected IList<object> buildObjects;
 
-            protected IList<object> _buildObjects;
             protected Factory(TDomain domain, TEntity entity)
             {
                 Domain = domain;
                 Entity = entity;
             }
+
+            protected TEntity Entity { get; }
+
+            protected TDomain Domain { get; }
 
             public static TFactory For(TDomain domain, TEntity entity)
             {
@@ -49,7 +63,8 @@
                 asexceptionMethod = System.Reflection.TypeExtensions.GetMethod(exceptionType, "AsException", new Type[0]);
 #endif
 
-                var parameters = constructorInfo.GetParameters().Skip(2);//todo improve
+                // TODO: improve
+                var parameters = constructorInfo.GetParameters().Skip(2);
                 var list = new List<object>() { domain, entity };
 
                 foreach (var item in parameters)
@@ -63,6 +78,7 @@
                     var expression = Expression.Lambda(returnType, ex).Compile();
                     list.Add(expression);
                 }
+
                 var res = constructorInfo.Invoke(list.ToArray());
                 return res as TFactory;
             }

@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{10E46B81-466
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GeekLearning.Domain.AspnetCore", "src\GeekLearning.Domain.AspnetCore\GeekLearning.Domain.AspnetCore.xproj", "{9B61EC3D-B5F8-44C1-9CCC-7708BA396ACC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B6F58FFD-6D9A-474E-8957-9E555B06181F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{B6F58FFD-6D9A-474E-8957-9E555B06181F}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
