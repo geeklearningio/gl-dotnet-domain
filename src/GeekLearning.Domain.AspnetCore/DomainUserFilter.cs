@@ -24,7 +24,7 @@
 
         public DomainUserFilter(
             ILogger<DomainUserFilter> logger,
-            IEnumerable<IIdentityDomain> identityDomains )
+            IEnumerable<IIdentityDomain> identityDomains)
         {
             this.logger = logger;
             this.identityDomains = identityDomains;
