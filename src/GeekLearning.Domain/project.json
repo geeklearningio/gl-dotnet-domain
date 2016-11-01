@@ -9,11 +9,14 @@
   },
 
   "dependencies": {
-    "NETStandard.Library": "1.6.0"
+    "NETStandard.Library": "1.6.0",
+    "GeekLearning.Domain.Functional": "1.0.0-*"
   },
 
   "frameworks": {
     "net452": {
+      "dependencies": {
+      }
     },
     "netstandard1.3": {
       "dependencies": {

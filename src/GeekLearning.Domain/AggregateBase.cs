@@ -7,46 +7,30 @@
     using System.Linq.Expressions;
     using System.Reflection;
 
-    public abstract class AggregateBase<TDomain> : IAggregate
-        where TDomain : IDomain
-    {
-        public AggregateBase(TDomain domain)
-        {
-            this.Domain = domain;
-        }
-
-        protected TDomain Domain { get; }
-    }
-
-    public abstract class AggregateBase<TDomain, TEntity> : AggregateBase<TDomain>
-        where TDomain : IDomain
+    public abstract class AggregateBase<TEntity>:IAggregate
         where TEntity : class
     {
-        public AggregateBase(TDomain domain, TEntity entity)
-            : base(domain)
+        public AggregateBase(TEntity entity)
         {
             Entity = entity;
         }
 
-        protected TEntity Entity { get; }
+        public TEntity Entity { get; }
 
         public abstract class Factory<TAggregate, TFactory>
-            where TAggregate : AggregateBase<TDomain, TEntity>
+            where TAggregate : AggregateBase<TEntity>
             where TFactory : class
         {
             protected IList<object> buildObjects;
 
-            protected Factory(TDomain domain, TEntity entity)
+            protected Factory(TEntity entity)
             {
-                Domain = domain;
                 Entity = entity;
             }
 
             protected TEntity Entity { get; }
 
-            protected TDomain Domain { get; }
-
-            public static TFactory For(TDomain domain, TEntity entity)
+            public static TFactory For(TEntity entity)
             {
                 var factoryType = typeof(TFactory);
 
@@ -64,8 +48,8 @@
 #endif
 
                 // TODO: improve
-                var parameters = constructorInfo.GetParameters().Skip(2);
-                var list = new List<object>() { domain, entity };
+                var parameters = constructorInfo.GetParameters().Skip(1);
+                var list = new List<object>() { entity };
 
                 foreach (var item in parameters)
                 {
@@ -87,11 +71,11 @@
             {
                 ConstructorInfo constructorInfo;
 #if NET452
-                constructorInfo = typeof(TAggregate).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(TDomain), typeof(TEntity) }, null);
+                constructorInfo = typeof(TAggregate).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(TEntity) }, null);
 #else
                 constructorInfo = System.Reflection.TypeExtensions.GetConstructors(typeof(TAggregate), BindingFlags.Instance | BindingFlags.NonPublic).Single();
 #endif   
-                return constructorInfo.Invoke(new object[] { Domain, Entity }) as TAggregate;
+                return constructorInfo.Invoke(new object[] { Entity }) as TAggregate;
             }
         }
     }
