@@ -1,6 +1,6 @@
 ﻿namespace GeekLearning.Domain.Explanations
 {
-    public class Deleted<T> : Explanation where T : IAggregate
+    public class Deleted<T> : Explanation 
     {
         public Deleted(string message)
             : base(message, $"AggregateType : { typeof(T).FullName }")
