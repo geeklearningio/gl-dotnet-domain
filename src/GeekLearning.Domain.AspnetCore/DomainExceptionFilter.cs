@@ -54,7 +54,8 @@
 
 
             var maybeResult = new MaybeResult<object>(domainException.Explanation);
-            var mvcError = !this.HasOutputFormatterForAcceptHeaders(context, maybeResult);
+            //todo ask adrien pourquoi ils ne le font pas si call ajax... on veut aussi récup erreur
+            var mvcError = !this.HasOutputFormatterForAcceptHeaders(context, maybeResult) && !IsAjaxRequest(context.HttpContext.Request);
 
             if (!mvcError)
             {
@@ -63,7 +64,10 @@
                 context.ExceptionHandled = true;
             }
         }
-
+        private static bool IsAjaxRequest(HttpRequest request)
+        {
+            return request.Headers["X-Requested-With"] == "XMLHttpRequest";
+        }
         private bool HasOutputFormatterForAcceptHeaders(ActionContext context, ObjectResult result)
         {
             var formatterContext = new OutputFormatterWriteContext(

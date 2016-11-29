@@ -31,7 +31,10 @@
             {
                 return HttpStatusCode.NoContent;
             }
-
+            if (explanation.GetType().IsSubclassOfRawGeneric(typeof(Unremovable<>)))
+            {
+                return HttpStatusCode.BadRequest;
+            }
             if (explanation.GetType().IsSubclassOfRawGeneric(typeof(NotFound<>)))
             {
                 return HttpStatusCode.NotFound;
