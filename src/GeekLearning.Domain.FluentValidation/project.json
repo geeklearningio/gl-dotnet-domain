@@ -9,14 +9,16 @@
   },
 
   "dependencies": {
-    "NETStandard.Library": "1.6.0",
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
-    "FluentValidation": "6.4.0-beta3",
+    "NETStandard.Library": "1.6.1",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
+    
+    "FluentValidation": "6.4.0-beta9",
+    
     "GeekLearning.Domain": "*"
   },
 
   "frameworks": {
-    "net452": {},
-    "netstandard1.6": {}
+    "net45": {},
+    "netstandard1.3": {}
   }
 }

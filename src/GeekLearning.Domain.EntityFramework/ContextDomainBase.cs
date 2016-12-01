@@ -39,6 +39,7 @@
                     throw new Explanations.Validation<IAggregate>(res).AsException();
                 }
             }
+
             await DbContext.SaveChangesAsync();
         }
 
