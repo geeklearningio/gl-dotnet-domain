@@ -1,0 +1,10 @@
+﻿@model GeekLearning.Domain.DomainException
+
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Domain Error.</h1>
+<h2 class="text-danger">@Model.Explanation.Message</h2>
+
+<small>Request Id: @Context.TraceIdentifier</small>

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{FBAC4C17-D755-49A9-959D-18FD6B95B543}"
 EndProject
@@ -11,14 +11,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{10E46B81-466
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GeekLearning.Domain.AspnetCore", "src\GeekLearning.Domain.AspnetCore\GeekLearning.Domain.AspnetCore.xproj", "{9B61EC3D-B5F8-44C1-9CCC-7708BA396ACC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B6F58FFD-6D9A-474E-8957-9E555B06181F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "items", "items", "{B6F58FFD-6D9A-474E-8957-9E555B06181F}"
 	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		GitVersion.yml = GitVersion.yml
 		global.json = global.json
+		LICENSE.md = LICENSE.md
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GeekLearning.Domain.WebApiSamples", "samples\GeekLearning.Domain.WebApiSamples\GeekLearning.Domain.WebApiSamples.xproj", "{B73A26F5-10F2-4300-9FA1-C4518F5530A9}"
-EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GeekLearning.Domain.FluentValidation", "src\GeekLearning.Domain.FluentValidation\GeekLearning.Domain.FluentValidation.xproj", "{3B3120D6-E894-49AB-A057-D42FD5DD4122}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GeekLearning.Domain.WebSamples", "samples\GeekLearning.Domain.WebSamples\GeekLearning.Domain.WebSamples.xproj", "{FDDDB504-FC35-4096-85A2-9A84DA1C0DBB}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GeekLearning.Domain.EntityFramework", "src\GeekLearning.Domain.EntityFramework\GeekLearning.Domain.EntityFramework.xproj", "{8A70230C-25C3-41ED-A0BC-21499639B0F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,14 +41,18 @@ Global
 		{9B61EC3D-B5F8-44C1-9CCC-7708BA396ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B61EC3D-B5F8-44C1-9CCC-7708BA396ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B61EC3D-B5F8-44C1-9CCC-7708BA396ACC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B73A26F5-10F2-4300-9FA1-C4518F5530A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B73A26F5-10F2-4300-9FA1-C4518F5530A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B73A26F5-10F2-4300-9FA1-C4518F5530A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B73A26F5-10F2-4300-9FA1-C4518F5530A9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B3120D6-E894-49AB-A057-D42FD5DD4122}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3B3120D6-E894-49AB-A057-D42FD5DD4122}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B3120D6-E894-49AB-A057-D42FD5DD4122}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B3120D6-E894-49AB-A057-D42FD5DD4122}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDDDB504-FC35-4096-85A2-9A84DA1C0DBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDDDB504-FC35-4096-85A2-9A84DA1C0DBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDDDB504-FC35-4096-85A2-9A84DA1C0DBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDDDB504-FC35-4096-85A2-9A84DA1C0DBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A70230C-25C3-41ED-A0BC-21499639B0F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A70230C-25C3-41ED-A0BC-21499639B0F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A70230C-25C3-41ED-A0BC-21499639B0F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A70230C-25C3-41ED-A0BC-21499639B0F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,7 +60,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AB4A9CDC-52E5-4848-AE4B-53B2F395007C} = {10E46B81-4662-482C-A3AA-20141409D043}
 		{9B61EC3D-B5F8-44C1-9CCC-7708BA396ACC} = {10E46B81-4662-482C-A3AA-20141409D043}
-		{B73A26F5-10F2-4300-9FA1-C4518F5530A9} = {FBAC4C17-D755-49A9-959D-18FD6B95B543}
 		{3B3120D6-E894-49AB-A057-D42FD5DD4122} = {10E46B81-4662-482C-A3AA-20141409D043}
+		{FDDDB504-FC35-4096-85A2-9A84DA1C0DBB} = {FBAC4C17-D755-49A9-959D-18FD6B95B543}
+		{8A70230C-25C3-41ED-A0BC-21499639B0F2} = {10E46B81-4662-482C-A3AA-20141409D043}
 	EndGlobalSection
 EndGlobal

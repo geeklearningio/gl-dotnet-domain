@@ -1,0 +1,22 @@
+﻿{
+  "version": "0.0.1-*",
+  "description": "Using GeekLearning.Domain with this EntityFramework Core helpers.",
+  "authors": [ "Geek Learning", "Adrien Siffermann", "Cyprien Autexier" ],
+  "packOptions": {
+    "tags": [],
+    "projectUrl": "",
+    "licenseUrl": ""
+  },
+
+  "dependencies": {
+    "NETStandard.Library": "1.6.1",
+    "Microsoft.EntityFrameworkCore": "1.1.0",
+
+    "GeekLearning.Domain": "*"
+  },
+
+  "frameworks": {
+    "net451": {},
+    "netstandard1.3": {}
+  }
+}

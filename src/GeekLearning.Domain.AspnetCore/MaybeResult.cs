@@ -7,7 +7,6 @@
     using Microsoft.Extensions.Options;
     using Microsoft.Net.Http.Headers;
     using System;
-    using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
 
@@ -15,13 +14,13 @@
     {
         private Maybe<T> maybe;
 
-        public MaybeResult(Maybe<T> maybe) 
+        public MaybeResult(Maybe<T> maybe)
             : base(null)
         {
             this.maybe = maybe;
         }
 
-        public MaybeResult(Maybe<T> maybe, object routeValues) 
+        public MaybeResult(Maybe<T> maybe, object routeValues)
             : this(maybe)
         {
             this.RouteValues = routeValues == null ? null : new RouteValueDictionary(routeValues);
@@ -44,7 +43,7 @@
             {
                 this.Value = new Response<T>
                 {
-                    Content = this.maybe.Value,
+                    Content = this.maybe.HasValue ? this.maybe.Value : null,
                     Status = new ReponseStatus
                     {
                         Code = this.StatusCode.Value,
