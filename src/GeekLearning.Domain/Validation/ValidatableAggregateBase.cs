@@ -22,7 +22,7 @@
         }
     }
 
-    public abstract class ValidatableAggregateBase<TDomain, TEntity, TUser, TValidator> : AggregateBase<TDomain, TEntity>, IValidatableAggregate
+    public abstract class ValidatableAggregateBase<TDomain, TEntity, TUser, TValidator> : AggregateBase<TEntity>, IValidatableAggregate
         where TDomain : ValidatableDomainBase<TUser>
         where TUser : class, IAggregate
         where TEntity : class
@@ -31,7 +31,7 @@
         private readonly IValidator validator;
 
         public ValidatableAggregateBase(TDomain domain, TEntity entity)
-            : base(domain, entity)
+            : base(entity)
         {
             this.validator = domain.GetValidator(typeof(TValidator));
         }

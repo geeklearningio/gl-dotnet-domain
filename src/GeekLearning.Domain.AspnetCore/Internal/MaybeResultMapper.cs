@@ -32,6 +32,11 @@
                 return HttpStatusCode.NoContent;
             }
 
+            if (explanation.GetType().IsSubclassOfRawGeneric(typeof(Unremovable<>)))
+            {
+                return HttpStatusCode.BadRequest;
+            }
+
             if (explanation.GetType().IsSubclassOfRawGeneric(typeof(NotFound<>)))
             {
                 return HttpStatusCode.NotFound;
@@ -47,7 +52,7 @@
                 return HttpStatusCode.Conflict;
             }
 
-            if (explanation is ShouldProvideIdentity)
+            if (explanation is Anonymous)
             {
                 return HttpStatusCode.Unauthorized;
             }

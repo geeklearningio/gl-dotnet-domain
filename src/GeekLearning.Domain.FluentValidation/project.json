@@ -1,7 +1,7 @@
 {
   "version": "0.0.1-*",
   "description": "Plugin to use FluentValidation as the validation layer for GeekLearning.Domain.",
-  "authors": [ "Geek Learning", "Adrien Siffermann", "Cyprien Autexier" ],
+  "authors": [ "Geek Learning", "Adrien Siffermann", "Cyprien Autexier", "Anna Yafi" ],
   "packOptions": {
     "tags": [],
     "projectUrl": "",

@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class Updated<T> : Explanation where T : IAggregate
+    public class Updated<T> : Explanation
     {
         public Updated(string message, IEnumerable<Explanation> details)
             : base(message, $"AggregateType : { typeof(T).FullName }", details)
