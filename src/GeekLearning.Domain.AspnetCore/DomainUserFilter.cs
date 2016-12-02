@@ -1,21 +1,8 @@
 ﻿namespace GeekLearning.Domain.AspnetCore
 {
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
-    using Microsoft.AspNetCore.Mvc.Formatters;
-    using Microsoft.AspNetCore.Mvc.Formatters.Internal;
-    using Microsoft.AspNetCore.Mvc.Internal;
     using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.Options;
-    using Microsoft.Extensions.Primitives;
-    using Microsoft.Net.Http.Headers;
     using System.Collections.Generic;
-    using System.Linq;
-    using System;
-    using System.IO;
-    using System.Text;
 
     public class DomainUserFilter : ActionFilterAttribute
     {

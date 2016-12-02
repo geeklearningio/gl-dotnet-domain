@@ -1,8 +1,7 @@
-﻿
-using GeekLearning.Domain.Explanations;
-
-namespace GeekLearning.Domain
+﻿namespace GeekLearning.Domain
 {
+    using Explanations;
+
     public class Maybe<T> where T : class
     {
         private T value;

@@ -8,7 +8,7 @@
         {
             if (throwNow)
             {
-                throw new Explanations.ShouldProvideIdentity().AsException();
+                throw new Explanations.Anonymous().AsException();
             }
             else
             {

@@ -1,6 +1,5 @@
 ﻿namespace GeekLearning.Domain.AspnetCore
 {
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
@@ -9,12 +8,11 @@
     using Microsoft.AspNetCore.Mvc.Internal;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
-    using Microsoft.Extensions.Primitives;
     using Microsoft.Net.Http.Headers;
-    using System.Collections.Generic;
-    using System.Linq;
     using System;
+    using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Text;
 
     public class DomainExceptionFilter : ExceptionFilterAttribute
@@ -52,9 +50,7 @@
                 this.logger.LogError(new EventId(1), domainException, domainException.Explanation.Message);
             }
 
-
             var maybeResult = new MaybeResult<object>(domainException.Explanation);
-            //todo ask adrien pourquoi ils ne le font pas si call ajax... on veut aussi récup erreur
             var mvcError = !this.HasOutputFormatterForAcceptHeaders(context, maybeResult) && !IsAjaxRequest(context.HttpContext.Request);
 
             if (!mvcError)
@@ -64,10 +60,7 @@
                 context.ExceptionHandled = true;
             }
         }
-        private static bool IsAjaxRequest(HttpRequest request)
-        {
-            return request.Headers["X-Requested-With"] == "XMLHttpRequest";
-        }
+
         private bool HasOutputFormatterForAcceptHeaders(ActionContext context, ObjectResult result)
         {
             var formatterContext = new OutputFormatterWriteContext(
@@ -110,6 +103,11 @@
             result.Sort((left, right) => left.Quality > right.Quality ? -1 : (left.Quality == right.Quality ? 0 : 1));
 
             return result;
+        }
+
+        private static bool IsAjaxRequest(HttpRequest request)
+        {
+            return request.Headers["X-Requested-With"] == "XMLHttpRequest";
         }
     }
 }

@@ -27,7 +27,7 @@ namespace GeekLearning.Domain
         {
             if (!this.Domain.CurrentUser.HasValue)
             {
-                throw new Explanations.ShouldProvideIdentity().AsException();
+                throw new Explanations.Anonymous().AsException();
             }
         }
     }

@@ -27,7 +27,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GeekLearning.Domain.WebSamp
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GeekLearning.Domain.EntityFramework", "src\GeekLearning.Domain.EntityFramework\GeekLearning.Domain.EntityFramework.xproj", "{8A70230C-25C3-41ED-A0BC-21499639B0F2}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GeekLearning.Domain.Functional", "src\GeekLearning.Domain.Functional\GeekLearning.Domain.Functional.xproj", "{9A7A70E7-FB4C-4263-92D8-4CF305367AEF}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GeekLearning.Domain.Primitives", "src\GeekLearning.Domain.Primitives\GeekLearning.Domain.Primitives.xproj", "{9A7A70E7-FB4C-4263-92D8-4CF305367AEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

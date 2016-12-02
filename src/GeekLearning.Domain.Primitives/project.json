@@ -1,6 +1,6 @@
-﻿{
+{
   "version": "0.0.1-*",
-  "description": "Library to help implement the Domain Driven Design.",
+  "description": "Primitive types used by the Domain.",
   "authors": [ "Geek Learning", "Adrien Siffermann", "Cyprien Autexier", "Anna Yafi" ],
   "packOptions": {
     "tags": [],
@@ -9,17 +9,14 @@
   },
 
   "dependencies": {
-    "NETStandard.Library": "1.6.1",
-
-    "GeekLearning.Domain.Primitives": "*"
+    "NETStandard.Library": "1.6.1"
   },
 
   "frameworks": {
     "net45": {},
-    "netstandard1.3": {
+    "netstandard1.1": {
       "dependencies": {
-        "System.Security.Claims": "4.0.1",
-        "System.Reflection.TypeExtensions": "4.1.0"
+        "System.Runtime": "4.3.0"
       }
     }
   }

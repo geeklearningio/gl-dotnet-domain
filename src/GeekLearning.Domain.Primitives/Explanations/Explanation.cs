@@ -4,7 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    public abstract class Explanation
+
+    public class Explanation
     {
         public Explanation(string message, string internalMessage, IEnumerable<Explanation> details)
         {

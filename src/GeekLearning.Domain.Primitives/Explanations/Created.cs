@@ -1,6 +1,6 @@
 ﻿namespace GeekLearning.Domain.Explanations
 {
-    public class Created<T> : Explanation where T : IAggregate
+    public class Created<T> : Explanation
     {
         public Created(string message)
             : base(message, $"AggregateType : { typeof(T).FullName }")

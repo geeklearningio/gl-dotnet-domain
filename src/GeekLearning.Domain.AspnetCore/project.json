@@ -1,7 +1,7 @@
 {
   "version": "0.0.1-*",
   "description": "ASP.NET Core helper library to deal with a Domain layer.",
-  "authors": [ "Geek Learning", "Adrien Siffermann", "Cyprien Autexier" ],
+  "authors": [ "Geek Learning", "Adrien Siffermann", "Cyprien Autexier", "Anna Yafi" ],
   "packOptions": {
     "tags": [],
     "projectUrl": "",

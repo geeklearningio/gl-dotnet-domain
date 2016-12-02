@@ -1,7 +1,7 @@
 ﻿{
   "version": "0.0.1-*",
-  "description": "Using GeekLearning.Domain with this EntityFramework Core helpers.",
-  "authors": [ "Geek Learning", "Adrien Siffermann", "Cyprien Autexier" ],
+  "description": "EntityFramework Core helper library to deal with a Domain layer.",
+  "authors": [ "Geek Learning", "Adrien Siffermann", "Cyprien Autexier", "Anna Yafi" ],
   "packOptions": {
     "tags": [],
     "projectUrl": "",
