@@ -60,7 +60,10 @@
             {
                 context.Result = maybeResult;
                 context.Exception = domainException;
-                context.ExceptionHandled = true;
+
+                // In .NET Core 1.1, setting ExceptionHandled changes the response to 200 / No content
+                // Commenting it at the moment!
+                // context.ExceptionHandled = true;
             }
         }
 
