@@ -1,5 +1,6 @@
 ﻿namespace GeekLearning.Domain.AspnetCore
 {
+    using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -12,8 +13,29 @@
                 options.Filters.Add(typeof(DomainExceptionFilter));
                 options.Filters.Add(typeof(DomainUserFilter));
             });
+
             mvcBuilder.Services.AddTransient<Internal.MaybeResultMapper>();
             return mvcBuilder;
+        }
+
+        public static IMvcBuilder AddDomainExceptions(this IMvcBuilder mvcBuilder)
+        {
+            return mvcBuilder.AddMvcOptions(options =>
+            {
+                options.Filters.Add(typeof(DomainExceptionFilter));
+            });
+        }
+
+        public static IMvcBuilder AddMaybeResults(this IMvcBuilder mvcBuilder)
+        {
+            mvcBuilder.Services.AddTransient<Internal.MaybeResultMapper>();
+            return mvcBuilder;
+        }
+
+        public static IApplicationBuilder UseIdentityDomain(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<Internal.DomainUserMiddleware>();
+            return app;
         }
 
         public static IServiceCollection AddDomain<TDomain>(this IServiceCollection services)

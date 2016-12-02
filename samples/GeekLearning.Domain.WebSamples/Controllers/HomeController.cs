@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Diagnostics;
-using GeekLearning.Domain.AspnetCore;
-
-namespace GeekLearning.Domain.WebSamples.Controllers
+﻿namespace GeekLearning.Domain.WebSamples.Controllers
 {
+    using AspnetCore;
+    using Microsoft.AspNetCore.Mvc;
+    using System;
+
     public class HomeController : Controller
     {
         private readonly SampleDomain domain;

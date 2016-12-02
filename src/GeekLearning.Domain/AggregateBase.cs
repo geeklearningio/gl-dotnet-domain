@@ -38,7 +38,7 @@
                 MethodInfo asexceptionMethod;
                 var exceptionType = typeof(InvalidAggregateAccess<>).MakeGenericType(typeof(TAggregate));
 
-#if NET452
+#if NET45
                 constructorInfo = factoryType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Single();
                 asexceptionMethod = exceptionType.GetMethod("AsException", new Type[0], new ParameterModifier[0]);
 
@@ -70,7 +70,7 @@
             public virtual TAggregate Build()
             {
                 ConstructorInfo constructorInfo;
-#if NET452
+#if NET45
                 constructorInfo = typeof(TAggregate).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(TEntity) }, null);
 #else
                 constructorInfo = System.Reflection.TypeExtensions.GetConstructors(typeof(TAggregate), BindingFlags.Instance | BindingFlags.NonPublic).Single();

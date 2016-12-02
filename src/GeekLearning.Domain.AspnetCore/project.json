@@ -9,17 +9,18 @@
   },
 
   "dependencies": {
-    "NETStandard.Library": "1.6.0",
-    "Microsoft.AspNetCore.Mvc.Abstractions": "1.0.1",
-    "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
-    "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
-    "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
-    "GeekLearning.Domain": "*",
-    "Microsoft.Extensions.DependencyInjection": "1.0.0"
+    "NETStandard.Library": "1.6.1",
+    "Microsoft.AspNetCore.Mvc.Abstractions": "1.1.0",
+    "Microsoft.AspNetCore.Mvc.Core": "1.1.0",
+    "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.1.0",
+    "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+    "Microsoft.Extensions.DependencyInjection": "1.1.0",
+
+    "GeekLearning.Domain": "*"
   },
 
   "frameworks": {
-    "net452": {},
+    "net451": {},
     "netstandard1.6": {}
   }
 }
