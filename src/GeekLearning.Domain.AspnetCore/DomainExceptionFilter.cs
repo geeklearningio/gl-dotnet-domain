@@ -59,6 +59,8 @@
                 context.Exception = domainException;
                 //context.ExceptionHandled = true;
             }
+
+            base.OnException(context);
         }
 
         private bool HasOutputFormatterForAcceptHeaders(ActionContext context, ObjectResult result)
