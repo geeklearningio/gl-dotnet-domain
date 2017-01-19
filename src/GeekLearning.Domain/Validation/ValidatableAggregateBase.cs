@@ -41,4 +41,27 @@
             return this.validator.ValidateAsync(this);
         }
     }
+    public abstract class ValidatableAggregateBase<TEntity, TValidator> : AggregateBase<TEntity>, IValidatableAggregate
+       where TEntity : class
+       where TValidator : IValidator
+    {
+        protected abstract IValidator validator { get; }
+
+        public ValidatableAggregateBase(TEntity entity)
+            : base(entity)
+        {
+        }
+
+        public Task<IValidationResult> ValidateAsync()
+        {
+            return this.validator.ValidateAsync(this);
+        }
+
+        public Task ValidateAndThrowAsync()
+        {
+            return this.validator.ValidateAndThrowAsync(this);
+        }
+
+    }
+
 }
