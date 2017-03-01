@@ -8,7 +8,6 @@
     using System.Reflection;
 
     public abstract class AggregateBase<TEntity>:IAggregate
-        where TEntity : class
     {
         public AggregateBase(TEntity entity)
         {

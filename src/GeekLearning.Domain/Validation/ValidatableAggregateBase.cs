@@ -42,7 +42,6 @@
         }
     }
     public abstract class ValidatableAggregateBase<TEntity, TValidator> : AggregateBase<TEntity>, IValidatableAggregate
-       where TEntity : class
        where TValidator : IValidator
     {
         protected abstract IValidator validator { get; }
