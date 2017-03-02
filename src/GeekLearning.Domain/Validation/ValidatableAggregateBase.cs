@@ -1,6 +1,7 @@
 ﻿namespace GeekLearning.Domain.Validation
 {
     using Domain;
+    using System;
     using System.Threading.Tasks;
 
     public abstract class ValidatableAggregateBase<TDomain, TUser, TValidator> : AggregateBase<TDomain>, IValidatableAggregate
@@ -55,11 +56,16 @@
 
         public Task<IValidationResult> ValidateAsync()
         {
+            if (validator == null)
+                throw new ArgumentException($"Method {nameof(WithValidator)} should have been called first");
             return this.validator.ValidateAsync(this);
         }
 
         public Task ValidateAndThrowAsync()
         {
+            if (validator == null)
+                throw new ArgumentException($"Method {nameof(WithValidator)} should have been called first");
+
             return this.validator.ValidateAndThrowAsync(this);
         }
 
