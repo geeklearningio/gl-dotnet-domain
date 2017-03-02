@@ -1,6 +1,7 @@
 ﻿namespace GeekLearning.Domain.Validation
 {
     using Domain;
+    using System;
     using System.Threading.Tasks;
 
     public abstract class ValidatableAggregateBase<TDomain, TUser, TValidator> : AggregateBase<TDomain>, IValidatableAggregate
@@ -44,7 +45,9 @@
     public abstract class ValidatableAggregateBase<TEntity, TValidator> : AggregateBase<TEntity>, IValidatableAggregate
        where TValidator : IValidator
     {
-        protected abstract IValidator validator { get; }
+        private IValidator validator;
+
+        protected virtual IValidator WithValidator(IValidatorFactory factory) => validator = factory.GetValidator<TValidator>();
 
         public ValidatableAggregateBase(TEntity entity)
             : base(entity)
@@ -53,11 +56,16 @@
 
         public Task<IValidationResult> ValidateAsync()
         {
+            if (validator == null)
+                throw new ArgumentException($"Method {nameof(WithValidator)} should have been called first");
             return this.validator.ValidateAsync(this);
         }
 
         public Task ValidateAndThrowAsync()
         {
+            if (validator == null)
+                throw new ArgumentException($"Method {nameof(WithValidator)} should have been called first");
+
             return this.validator.ValidateAndThrowAsync(this);
         }
 
