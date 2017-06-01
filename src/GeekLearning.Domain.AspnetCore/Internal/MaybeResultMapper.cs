@@ -52,6 +52,11 @@
                 return HttpStatusCode.Unauthorized;
             }
 
+            if (explanation is Forbidden)
+            {
+                return HttpStatusCode.Forbidden;
+            }
+
             return HttpStatusCode.InternalServerError;
         }
     }
