@@ -6,5 +6,10 @@
             : base("The current user is anonymous.")
         {
         }
+
+        public Anonymous(string message)
+            : base(message)
+        {
+        }
     }
 }
