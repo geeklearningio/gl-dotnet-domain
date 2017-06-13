@@ -57,6 +57,10 @@
                 return HttpStatusCode.Unauthorized;
             }
 
+            if (explanation is UnsufficientPrivileges)
+            {
+                return HttpStatusCode.Unauthorized;
+            }
             return HttpStatusCode.InternalServerError;
         }
     }
