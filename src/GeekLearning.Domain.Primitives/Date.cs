@@ -19,7 +19,7 @@
         public string ToString(string format) => DateTime.ToString(format);
         public override string ToString() => DateTime.ToString(CultureInfo.InvariantCulture);
         public static bool operator ==(Date dt, Date other) => IsEqualTo(dt, other);
-        public static bool operator !=(Date dt, Date other) => dt.Year == other.Year || dt.Month != other.Month || dt.Day != other.Day;
+        public static bool operator !=(Date dt, Date other) => dt.Year != other.Year || dt.Month != other.Month || dt.Day != other.Day;
         public static bool operator <(Date dt, Date other) => dt.DateTime < other.DateTime;
         public static bool operator >(Date dt, Date other) => dt.DateTime > other.DateTime;
         public static TimeSpan operator -(Date dt, Date other) => dt.DateTime - other.DateTime;
