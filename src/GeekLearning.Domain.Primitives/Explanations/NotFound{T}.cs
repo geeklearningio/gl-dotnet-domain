@@ -1,14 +1,9 @@
 ﻿namespace GeekLearning.Domain.Explanations
 {
-    public class NotFound : Explanation
+    public class NotFound<T> : NotFound
     {
         public NotFound(string message)
-            : base(message)
-        {
-        }
-
-        public NotFound(string message, string internalMessage)
-            : base(message, internalMessage)
+            : base(message, $"Object : { typeof(T).FullName }")
         {
         }
 
