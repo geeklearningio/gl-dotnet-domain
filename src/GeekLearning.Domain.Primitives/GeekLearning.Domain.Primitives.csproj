@@ -8,9 +8,8 @@
     <AssemblyName>GeekLearning.Domain.Primitives</AssemblyName>
     <PackageId>GeekLearning.Domain.Primitives</PackageId>
     <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <PackageProjectUrl>https://github.com/geeklearningio/gl-dotnet-domain</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/geeklearningio/gl-dotnet-domain/blob/master/LICENSE.md</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
@@ -20,6 +19,10 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
     <PackageReference Include="System.Runtime" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

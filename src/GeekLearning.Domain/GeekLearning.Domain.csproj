@@ -8,12 +8,8 @@
     <AssemblyName>GeekLearning.Domain</AssemblyName>
     <PackageId>GeekLearning.Domain</PackageId>
     <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <PackageProjectUrl>https://github.com/geeklearningio/gl-dotnet-domain</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/geeklearningio/gl-dotnet-domain/blob/master/LICENSE.md</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,6 +24,10 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
     <PackageReference Include="System.Security.Claims" Version="4.0.1" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>
