@@ -4,10 +4,9 @@
     <Description>ASP.NET Core helper library to deal with a Domain layer.</Description>
     <VersionPrefix>0.0.1</VersionPrefix>
     <Authors>Geek Learning;Adrien Siffermann;Cyprien Autexier;Anna Yafi</Authors>
-    <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>net451;netstandard2.0</TargetFrameworks>
     <AssemblyName>GeekLearning.Domain.AspnetCore</AssemblyName>
     <PackageId>GeekLearning.Domain.AspnetCore</PackageId>
-    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
     <PackageProjectUrl>https://github.com/geeklearningio/gl-dotnet-domain</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/geeklearningio/gl-dotnet-domain/blob/master/LICENSE.md</PackageLicenseUrl>
   </PropertyGroup>
@@ -30,6 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Policy\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 

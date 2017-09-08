@@ -21,20 +21,17 @@
         private readonly IOptions<DomainOptions> options;
         private readonly FormatterCollection<IOutputFormatter> optionsFormatters;
         private readonly Func<Stream, Encoding, TextWriter> writerFactory;
-        private readonly Internal.MaybeResultMapper maybeResultMapper;
 
         public DomainExceptionFilter(
             ILoggerFactory loggerFactory,
             IOptions<DomainOptions> domainOptions,
             IOptions<MvcOptions> mvcOptions,
-            IHttpResponseStreamWriterFactory writerFactory,
-            Internal.MaybeResultMapper maybeResultMapper)
+            IHttpResponseStreamWriterFactory writerFactory)
         {
             this.logger = loggerFactory.CreateLogger<DomainExceptionFilter>();
             this.options = domainOptions;
             this.optionsFormatters = mvcOptions.Value.OutputFormatters;
             this.writerFactory = writerFactory.CreateWriter;
-            this.maybeResultMapper = maybeResultMapper;
         }
 
         public override void OnException(ExceptionContext context)
@@ -57,7 +54,6 @@
             {
                 context.Result = maybeResult;
                 context.Exception = domainException;
-                //context.ExceptionHandled = true;
             }
         }
 

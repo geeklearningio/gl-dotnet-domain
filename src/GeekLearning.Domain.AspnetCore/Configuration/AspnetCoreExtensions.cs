@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
+    using System;
 
     public static class AspnetCoreExtensions
     {
@@ -14,7 +15,7 @@
                 options.Filters.Add(typeof(DomainUserFilter));
             });
 
-            mvcBuilder.Services.AddTransient<Internal.MaybeResultMapper>();
+            AddExplanationPolicy(mvcBuilder);
             return mvcBuilder;
         }
 
@@ -26,9 +27,16 @@
             });
         }
 
-        public static IMvcBuilder AddMaybeResults(this IMvcBuilder mvcBuilder)
+        public static IMvcBuilder AddExplanationPolicy(this IMvcBuilder mvcBuilder)
         {
-            mvcBuilder.Services.AddTransient<Internal.MaybeResultMapper>();
+            return AddExplanationPolicy(mvcBuilder, Internal.PolicyBuilder.ApplyDefaultPolicy);
+        }
+
+        public static IMvcBuilder AddExplanationPolicy(this IMvcBuilder mvcBuilder, Action<Policy.IPolicyBuilder> configure)
+        {
+            var policyBuilder = new Internal.PolicyBuilder();
+            configure(policyBuilder);
+            mvcBuilder.Services.TryAddSingleton(policyBuilder.Build());
             return mvcBuilder;
         }
 
