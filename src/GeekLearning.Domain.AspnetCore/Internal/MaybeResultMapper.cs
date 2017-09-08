@@ -59,7 +59,7 @@
 
             if (explanation is UnsufficientPrivileges)
             {
-                return HttpStatusCode.Forbidden;
+                return HttpStatusCode.Unauthorized;
             }
           
             if (explanation is Forbidden)
