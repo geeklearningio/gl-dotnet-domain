@@ -1,12 +1,9 @@
 ﻿using GeekLearning.Domain.AspnetCore.Policy;
 using GeekLearning.Domain.Explanations;
 using System;
-using System.Reflection;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace GeekLearning.Domain.AspnetCore.Internal
 {
@@ -28,7 +25,7 @@ namespace GeekLearning.Domain.AspnetCore.Internal
 
         public IPolicyBuilder Map<TExplanation>(HttpStatusCode status) where TExplanation : Explanation
         {
-            mappings.Add(x => x.GetType().IsSubclassOf(typeof(TExplanation)) ? (HttpStatusCode?)status : null);
+            mappings.Add(x => typeof(TExplanation).IsAssignableFrom(x.GetType()) ? (HttpStatusCode?)status : null);
 
             return this;
         }

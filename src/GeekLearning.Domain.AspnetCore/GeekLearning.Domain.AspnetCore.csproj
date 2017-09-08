@@ -4,7 +4,7 @@
     <Description>ASP.NET Core helper library to deal with a Domain layer.</Description>
     <VersionPrefix>0.0.1</VersionPrefix>
     <Authors>Geek Learning;Adrien Siffermann;Cyprien Autexier;Anna Yafi</Authors>
-    <TargetFrameworks>net451;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
     <AssemblyName>GeekLearning.Domain.AspnetCore</AssemblyName>
     <PackageId>GeekLearning.Domain.AspnetCore</PackageId>
     <PackageProjectUrl>https://github.com/geeklearningio/gl-dotnet-domain</PackageProjectUrl>
