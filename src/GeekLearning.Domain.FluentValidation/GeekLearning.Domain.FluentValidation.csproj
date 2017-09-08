@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Plugin to use FluentValidation as the validation layer for GeekLearning.Domain.</Description>
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <Authors>Geek Learning;Adrien Siffermann;Cyprien Autexier;Anna Yafi</Authors>
+    <TargetFrameworks>net45;netstandard1.3</TargetFrameworks>
+    <AssemblyName>GeekLearning.Domain.FluentValidation</AssemblyName>
+    <PackageId>GeekLearning.Domain.FluentValidation</PackageId>
+    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
+    <PackageProjectUrl>https://github.com/geeklearningio/gl-dotnet-domain</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/geeklearningio/gl-dotnet-domain/blob/master/LICENSE.md</PackageLicenseUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GeekLearning.Domain\GeekLearning.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.0" />
+    <PackageReference Include="FluentValidation" Version="6.4.0-beta9" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>
