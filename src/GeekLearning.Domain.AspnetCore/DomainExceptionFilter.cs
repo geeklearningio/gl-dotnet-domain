@@ -57,7 +57,6 @@
             {
                 context.Result = maybeResult;
                 context.Exception = domainException;
-                //context.ExceptionHandled = true;
             }
         }
 

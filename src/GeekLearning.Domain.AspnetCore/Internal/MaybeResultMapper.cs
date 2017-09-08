@@ -59,8 +59,14 @@
 
             if (explanation is UnsufficientPrivileges)
             {
-                return HttpStatusCode.Unauthorized;
+                return HttpStatusCode.Forbidden;
             }
+          
+            if (explanation is Forbidden)
+            {
+                return HttpStatusCode.Forbidden;
+            }
+
             return HttpStatusCode.InternalServerError;
         }
     }
