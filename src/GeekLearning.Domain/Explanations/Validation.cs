@@ -1,8 +1,8 @@
 ﻿namespace GeekLearning.Domain.Explanations
 {
+    using GeekLearning.Domain.Validation;
     using System.Collections.Generic;
     using System.Linq;
-    using Validation;
 
     public class Validation<TAggregate> : Explanation
     {
