@@ -1,8 +1,8 @@
 ﻿namespace GeekLearning.Domain.Explanations
 {
-    using Validation;
+    using GeekLearning.Domain.Validation;
 
-    public class ValidationFailure : Explanation
+    public class ValidationFailure : Invalid
     {
         public ValidationFailure(IValidationFailure failure)
             : base(failure.ToString())

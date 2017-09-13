@@ -55,7 +55,7 @@ namespace GeekLearning.Domain.AspnetCore.Internal
             policyBuilder.Map<Deleted>(HttpStatusCode.NoContent);
             policyBuilder.Map<Unremovable>(HttpStatusCode.BadRequest);
             policyBuilder.Map<NotFound>(HttpStatusCode.NotFound);
-            policyBuilder.Map(HttpStatusCode.BadRequest, explanation => explanation.GetType().IsSubclassOfRawGeneric(typeof(Validation<>)));
+            policyBuilder.Map<Invalid>(HttpStatusCode.BadRequest);
             policyBuilder.Map<Duplicated>(HttpStatusCode.Conflict);
             policyBuilder.Map<Anonymous>(HttpStatusCode.Unauthorized);
             policyBuilder.Map<UnsufficientPrivileges>(HttpStatusCode.Forbidden);

@@ -5,7 +5,7 @@
     using Microsoft.Extensions.DependencyInjection.Extensions;
     using System;
 
-    public static class AspnetCoreExtensions
+    public static class AspnetCoreDomainExtensions
     {
         public static IMvcBuilder AddDomain(this IMvcBuilder mvcBuilder)
         {
@@ -15,30 +15,10 @@
                 options.Filters.Add(typeof(DomainUserFilter));
             });
 
-            AddExplanationPolicy(mvcBuilder);
+            AspnetCoreExtensions.AddExplanationPolicy(mvcBuilder);
             return mvcBuilder;
         }
 
-        public static IMvcBuilder AddDomainExceptions(this IMvcBuilder mvcBuilder)
-        {
-            return mvcBuilder.AddMvcOptions(options =>
-            {
-                options.Filters.Add(typeof(DomainExceptionFilter));
-            });
-        }
-
-        public static IMvcBuilder AddExplanationPolicy(this IMvcBuilder mvcBuilder)
-        {
-            return AddExplanationPolicy(mvcBuilder, Internal.PolicyBuilder.ApplyDefaultPolicy);
-        }
-
-        public static IMvcBuilder AddExplanationPolicy(this IMvcBuilder mvcBuilder, Action<Policy.IPolicyBuilder> configure)
-        {
-            var policyBuilder = new Internal.PolicyBuilder();
-            configure(policyBuilder);
-            mvcBuilder.Services.TryAddSingleton(policyBuilder.Build());
-            return mvcBuilder;
-        }
 
         public static IApplicationBuilder UseIdentityDomain(this IApplicationBuilder app)
         {
