@@ -32,11 +32,11 @@
 
         public override Task ExecuteResultAsync(ActionContext context)
         {
-            var resultMapper = context.HttpContext.RequestServices.GetRequiredService<Internal.MaybeResultMapper>();
+            var resultMapper = context.HttpContext.RequestServices.GetRequiredService<Policy.IPolicy>();
             var options = context.HttpContext.RequestServices.GetRequiredService<IOptions<DomainOptions>>();
             bool isDebugEnabled = options.Value.Debug;
 
-            this.StatusCode = resultMapper.GetResult(this.maybe.Explanation);
+            this.StatusCode = (int)resultMapper.GetStatusCode(this.maybe.Explanation);
             context.HttpContext.Response.Headers.Add("x-request-id", context.HttpContext.TraceIdentifier);
 
             if (this.StatusCode != (int)HttpStatusCode.NoContent)

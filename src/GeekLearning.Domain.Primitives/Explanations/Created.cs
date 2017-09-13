@@ -1,19 +1,25 @@
 ﻿namespace GeekLearning.Domain.Explanations
 {
-    public class Created<T> : Explanation
+    public class Created : Explanation
     {
         public Created(string message)
-            : base(message, $"AggregateType : { typeof(T).FullName }")
+            : base(message)
         {
         }
 
+        public Created(string message, string internalMessage)
+            : base(message, internalMessage)
+        {
+        }
+
+
         public Created()
-            : this("Aggregate was created")
+            : this("Object was created")
         {
         }
 
         public Created(object key)
-            : this($"Aggregate was created with key '{ (key ?? "<null>").ToString() }'.")
+            : this($"Object was created with key '{ (key ?? "<null>").ToString() }'.")
         {
         }
     }

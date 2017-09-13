@@ -1,14 +1,9 @@
 ﻿namespace GeekLearning.Domain.Explanations
 {
-    public class NotLoaded : Explanation
+    public class NotLoaded<T> : NotLoaded
     {
         public NotLoaded(string message)
-            : base(message)
-        {
-        }
-
-        public NotLoaded(string message, string internalMessage)
-            : base(message, internalMessage)
+            : base(message, $"Object : { typeof(T).FullName }")
         {
         }
 

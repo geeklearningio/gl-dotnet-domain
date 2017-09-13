@@ -1,14 +1,9 @@
 ﻿namespace GeekLearning.Domain.Explanations
 {
-    public class Deleted : Explanation 
+    public class Deleted<T> : Deleted 
     {
         public Deleted(string message)
-            : base(message)
-        {
-        }
-
-        public Deleted(string message, string internalMessage)
-            : base(message, internalMessage)
+            : base(message, $"ObjectType : { typeof(T).FullName }")
         {
         }
 
