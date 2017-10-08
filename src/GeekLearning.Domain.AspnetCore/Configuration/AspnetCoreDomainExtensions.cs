@@ -11,10 +11,10 @@
         {
             mvcBuilder.AddMvcOptions(options =>
             {
-                options.Filters.Add(typeof(DomainExceptionFilter));
                 options.Filters.Add(typeof(DomainUserFilter));
             });
 
+            AspnetCoreExtensions.AddDomainExceptions(mvcBuilder);
             AspnetCoreExtensions.AddExplanationPolicy(mvcBuilder);
             return mvcBuilder;
         }
