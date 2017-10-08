@@ -21,7 +21,6 @@
         {
             this.Explanation = explanation;
         }
-
         public Explanation Explanation { get; }
     }
 }
