@@ -45,20 +45,21 @@ namespace GeekLearning.Domain.AspnetCore.Internal
             return this;
         }
 
-
-        public static void ApplyDefaultPolicy(IPolicyBuilder policyBuilder)
+        public IPolicyBuilder ApplyDefaultPolicy()
         {
-            policyBuilder.MapNull(HttpStatusCode.OK);
+            this.MapNull(HttpStatusCode.OK);
+            this.Map<Created>(HttpStatusCode.Created);
+            this.Map<Updated>(HttpStatusCode.OK);
+            this.Map<Deleted>(HttpStatusCode.NoContent);
+            this.Map<Unremovable>(HttpStatusCode.BadRequest);
+            this.Map<NotFound>(HttpStatusCode.NotFound);
+            this.Map<Invalid>(HttpStatusCode.BadRequest);
+            this.Map<Duplicated>(HttpStatusCode.Conflict);
+            this.Map<Anonymous>(HttpStatusCode.Unauthorized);
+            this.Map<Forbidden>(HttpStatusCode.Forbidden);
+            this.Map<UnsufficientPrivileges>(HttpStatusCode.Forbidden);
 
-            policyBuilder.Map<Created>(HttpStatusCode.Created);
-            policyBuilder.Map<Updated>(HttpStatusCode.OK);
-            policyBuilder.Map<Deleted>(HttpStatusCode.NoContent);
-            policyBuilder.Map<Unremovable>(HttpStatusCode.BadRequest);
-            policyBuilder.Map<NotFound>(HttpStatusCode.NotFound);
-            policyBuilder.Map<Invalid>(HttpStatusCode.BadRequest);
-            policyBuilder.Map<Duplicated>(HttpStatusCode.Conflict);
-            policyBuilder.Map<Anonymous>(HttpStatusCode.Unauthorized);
-            policyBuilder.Map<UnsufficientPrivileges>(HttpStatusCode.Forbidden);
+            return this;
         }
 
         private class Policy : IPolicy
