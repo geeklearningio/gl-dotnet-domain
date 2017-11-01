@@ -40,7 +40,7 @@
             if (domainException == null)
             {
                 this.logger.LogError(new EventId(1), context.Exception, context.Exception.Message);
-                domainException = new Explanations.Unknown().AsException(context.Exception);
+                domainException = new Explanations.Unknown(context.Exception).AsException(context.Exception);
             }
             else
             {
