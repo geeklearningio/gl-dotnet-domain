@@ -17,7 +17,7 @@
 
         public static IMvcBuilder AddExplanationPolicy(this IMvcBuilder mvcBuilder)
         {
-            return AddExplanationPolicy(mvcBuilder, Internal.PolicyBuilder.ApplyDefaultPolicy);
+            return AddExplanationPolicy(mvcBuilder, options => options.ApplyDefaultPolicy());
         }
 
         public static IMvcBuilder AddExplanationPolicy(this IMvcBuilder mvcBuilder, Action<Policy.IPolicyBuilder> configure)

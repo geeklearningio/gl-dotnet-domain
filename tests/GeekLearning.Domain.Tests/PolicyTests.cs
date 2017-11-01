@@ -14,7 +14,7 @@ namespace GeekLearning.Domain.Tests
         public void StandardPolicyHasExpectedBehavior(Explanation explanation, HttpStatusCode expectedCode)
         {
             var builder = new GeekLearning.Domain.AspnetCore.Internal.PolicyBuilder();
-            GeekLearning.Domain.AspnetCore.Internal.PolicyBuilder.ApplyDefaultPolicy(builder);
+            builder.ApplyDefaultPolicy();
 
             var policy = builder.Build();
 
@@ -32,6 +32,7 @@ namespace GeekLearning.Domain.Tests
                 yield return new object[] { new NotFound<object>("not found"), HttpStatusCode.NotFound };
                 yield return new object[] { new UnsufficientPrivileges("message"), HttpStatusCode.Forbidden };
                 yield return new object[] { new Anonymous("message"), HttpStatusCode.Unauthorized };
+                yield return new object[] { new Forbidden(), HttpStatusCode.Forbidden };
             }
 
             public IEnumerator<object[]> GetEnumerator()
