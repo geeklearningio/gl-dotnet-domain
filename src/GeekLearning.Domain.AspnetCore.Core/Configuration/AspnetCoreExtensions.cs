@@ -27,5 +27,17 @@
             mvcBuilder.Services.TryAddSingleton(policyBuilder.Build());
             return mvcBuilder;
         }
+
+        public static IServiceCollection AddRequestTraceIdentifier(this IServiceCollection services)
+        {
+            services.TryAddTransient<IRequestIdProvider, TraceIdentifierAsRequestIdProvider>();
+            return services;
+
+        }
+        public static IServiceCollection AddRequestActivityIdentifier(this IServiceCollection services)
+        {
+            services.TryAddTransient<IRequestIdProvider, ActivityIdAsRequestIdProvider>();
+            return services;
+        }
     }
 }
