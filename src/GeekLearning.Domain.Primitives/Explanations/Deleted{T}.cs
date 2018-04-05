@@ -7,6 +7,11 @@
         {
         }
 
+        public Deleted(string message, string internalMessage)
+           : base(message, internalMessage)
+        {
+        }
+
         public Deleted()
             : this("Object was deleted")
         {

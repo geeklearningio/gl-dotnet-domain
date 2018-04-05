@@ -2,8 +2,14 @@
 {
     public class Created<T> : Created
     {
+
         public Created(string message)
-            : base(message, $"ObjectType : { typeof(T).FullName }")
+          : base(message, $"ObjectType : { typeof(T).FullName }")
+        {
+        }
+
+        public Created(string message, string internalMessage)
+            : base(message, internalMessage)
         {
         }
 
