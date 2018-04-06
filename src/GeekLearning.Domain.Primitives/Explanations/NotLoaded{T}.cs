@@ -7,6 +7,11 @@
         {
         }
 
+        public NotLoaded(string message, string internalMessage)
+            : base(message, internalMessage)
+        {
+        }
+
         public NotLoaded()
             : this("Object was not loaded")
         {

@@ -7,6 +7,11 @@
         {
         }
 
+        public NotFound(string message, string internalMessage)
+        : base(message, internalMessage)
+        {
+        }
+
         public NotFound()
             : this("Object was not found")
         {

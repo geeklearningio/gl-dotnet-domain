@@ -16,6 +16,11 @@
         {
         }
 
+        public Updated(string message, string internalMessage)
+            : base(message, internalMessage, Enumerable.Empty<Explanation>())
+        {
+        }
+
         public Updated()
             : this("Object was updated", Enumerable.Empty<Explanation>())
         {

@@ -11,5 +11,10 @@
             : base(message)
         {
         }
+
+        public Anonymous(string message, string internalMessage)
+           : base(message, internalMessage)
+        {
+        }
     }
 }
