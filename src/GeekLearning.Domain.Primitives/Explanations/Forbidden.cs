@@ -3,7 +3,17 @@
     public class Forbidden : Explanation
     {
         public Forbidden() 
-            : base("The action is forbidden for the current user.")
+            : this("The action is forbidden for the current user.")
+        {
+        }
+        
+        public Forbidden(string message)
+            : base(message)
+        {
+        }
+
+        public Forbidden(string message, string internalMessage)
+            : base(message, internalMessage)
         {
         }
     }
