@@ -2,7 +2,6 @@
 {
     using Explanations;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
-    using System.Linq;
 
     public static class ModelStateExtensions
     {

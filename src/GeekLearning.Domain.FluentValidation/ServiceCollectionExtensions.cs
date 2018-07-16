@@ -3,7 +3,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
 
-    public static class GeekLearningDomainFluentValidationExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddDomainFluentValidation(this IServiceCollection services)
         {

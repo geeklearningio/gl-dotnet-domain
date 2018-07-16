@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GeekLearning.Domain
+﻿namespace GeekLearning.Domain
 {
     public abstract class ActionBase<TDomain, TUser, TAggregate, TEntity> : IAction<TAggregate>
         where TDomain : IDomain<TUser>

@@ -19,7 +19,6 @@
         public IValidationFailure Failure { get; }
     }
 
-
     public class ValidationFailure<TAggregate> : ValidationFailure
     {
         public ValidationFailure(IValidationFailure failure)

@@ -1,12 +1,11 @@
-﻿using GeekLearning.Domain.AspnetCore.Policy;
-using GeekLearning.Domain.Explanations;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Reflection;
-
-namespace GeekLearning.Domain.AspnetCore.Internal
+﻿namespace GeekLearning.Domain.AspnetCore.Internal
 {
+    using GeekLearning.Domain.AspnetCore.Policy;
+    using GeekLearning.Domain.Explanations;
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+
     public class PolicyBuilder : IPolicyBuilder
     {
         List<Func<Explanation, HttpStatusCode?>> mappings = new List<Func<Explanation, HttpStatusCode?>>();
@@ -36,7 +35,6 @@ namespace GeekLearning.Domain.AspnetCore.Internal
 
             return this;
         }
-
 
         public IPolicyBuilder Map<TExplanation>(HttpStatusCode status, Func<TExplanation, bool> predicate) where TExplanation : Explanation
         {
