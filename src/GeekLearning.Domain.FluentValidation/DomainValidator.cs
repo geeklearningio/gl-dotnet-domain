@@ -1,7 +1,6 @@
 ﻿namespace GeekLearning.Domain.Validation
 {
     using Explanations;
-    using System;
     using System.Threading.Tasks;
 
     public abstract class DomainValidator<T> : FluentValidation.AbstractValidator<T>, IValidator<T>
@@ -34,6 +33,5 @@
             if (!result.IsValid)
                 throw new Validation<T>(result.Errors).AsException();
         }
-
     }
 }

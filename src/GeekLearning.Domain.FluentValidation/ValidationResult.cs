@@ -26,7 +26,6 @@
             get { return this.errors; }
         }
 
-
         public static implicit operator ValidationResult(FluentValidation.Results.ValidationResult fluentValidationResult)
         {
             if (!fluentValidationResult.Errors.Any())

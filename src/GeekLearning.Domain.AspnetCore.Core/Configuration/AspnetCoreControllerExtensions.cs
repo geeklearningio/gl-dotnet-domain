@@ -71,9 +71,8 @@
         {
             var feature = controller.HttpContext.Features.Get<IExceptionHandlerFeature>();
             var exception = feature?.Error;
-            var domainException = exception as DomainException;
 
-            if (domainException == null)
+            if (!(exception is DomainException domainException))
             {
                 return controller.View(errorViewName);
             }

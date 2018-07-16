@@ -5,7 +5,7 @@
     using Microsoft.AspNetCore.Mvc.Filters;
     using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.AspNetCore.Mvc.Formatters.Internal;
-    using Microsoft.AspNetCore.Mvc.Internal;
+    using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
     using Microsoft.Net.Http.Headers;
@@ -36,8 +36,7 @@
 
         public override void OnException(ExceptionContext context)
         {
-            var domainException = context.Exception as DomainException;
-            if (domainException == null)
+            if (!(context.Exception is DomainException domainException))
             {
                 this.logger.LogError(new EventId(1), context.Exception, context.Exception.Message);
                 domainException = new Explanations.Unknown(context.Exception).AsException(context.Exception);

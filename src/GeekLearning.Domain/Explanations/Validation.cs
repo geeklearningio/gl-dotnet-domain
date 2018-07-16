@@ -15,7 +15,7 @@
             : base(message, $"AggregateType : { typeof(TAggregate).FullName }", result.Errors.Select(e => new ValidationFailure<TAggregate>(e)).ToList())
         {
         }
-      
+
         public Validation(IValidationResult result)
             : this("Aggregate is invalid.", result)
         {
