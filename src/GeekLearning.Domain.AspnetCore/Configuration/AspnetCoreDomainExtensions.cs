@@ -3,7 +3,6 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
-    using System;
 
     public static class AspnetCoreDomainExtensions
     {
@@ -18,7 +17,6 @@
             AspnetCoreExtensions.AddExplanationPolicy(mvcBuilder);
             return mvcBuilder;
         }
-
 
         public static IApplicationBuilder UseIdentityDomain(this IApplicationBuilder app)
         {

@@ -2,7 +2,7 @@
 {
     public class Anonymous : Explanation
     {
-        public Anonymous() 
+        public Anonymous()
             : base("The current user is anonymous.")
         {
         }
