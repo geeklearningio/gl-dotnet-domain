@@ -1,15 +1,12 @@
 ﻿namespace GeekLearning.Domain.Explanations
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class Invalid : Explanation
     {
         public Invalid(string message, IEnumerable<Explanation> details)
-            : base(message,  details)
+            : base(message, details)
         {
         }
 

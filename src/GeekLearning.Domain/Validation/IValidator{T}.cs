@@ -5,6 +5,7 @@
     public interface IValidator<in T> : IValidator
     {
         Task<IValidationResult> ValidateAsync(T instance);
+
         Task ValidateAndThrowAsync(T instance);
     }
 }

@@ -14,7 +14,7 @@
             this.Details = details;
         }
 
-        public Explanation(string message) 
+        public Explanation(string message)
             : this(message, null, Enumerable.Empty<Explanation>())
         {
         }

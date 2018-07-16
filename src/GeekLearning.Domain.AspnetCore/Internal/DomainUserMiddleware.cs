@@ -41,7 +41,6 @@
                 }
             }
 
-
             await this.next.Invoke(context);
         }
     }

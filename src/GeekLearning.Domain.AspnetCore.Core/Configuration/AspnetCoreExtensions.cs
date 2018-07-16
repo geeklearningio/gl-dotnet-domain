@@ -1,6 +1,5 @@
 ﻿namespace GeekLearning.Domain.AspnetCore
 {
-    using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
     using System;
@@ -34,6 +33,7 @@
             return services;
 
         }
+
         public static IServiceCollection AddRequestActivityIdentifier(this IServiceCollection services)
         {
             services.TryAddTransient<IRequestIdProvider, ActivityIdAsRequestIdProvider>();
