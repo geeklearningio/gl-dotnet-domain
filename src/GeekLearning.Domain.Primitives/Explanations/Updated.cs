@@ -1,13 +1,17 @@
 ﻿namespace GeekLearning.Domain.Explanations
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    public class Updated<T> : Explanation
+    public class Updated : Explanation
     {
         public Updated(string message, IEnumerable<Explanation> details)
-            : base(message, $"AggregateType : { typeof(T).FullName }", details)
+            : base(message, details)
+        {
+        }
+
+        public Updated(string message, string innerMessage, IEnumerable<Explanation> details)
+           : base(message, details)
         {
         }
 
@@ -16,18 +20,23 @@
         {
         }
 
+        public Updated(string message, string internalMessage)
+            : this(message, internalMessage, Enumerable.Empty<Explanation>())
+        {
+        }
+
         public Updated()
-            : this("Aggregate was updated", Enumerable.Empty<Explanation>())
+            : this("Object was updated", Enumerable.Empty<Explanation>())
         {
         }
 
-        public Updated(Guid key)
-            : this($"Aggregate with key '{ key.ToString() }' was updated.", Enumerable.Empty<Explanation>())
+        public Updated(object key)
+            : this($"Object with key '{ key.ToString() }' was updated.", Enumerable.Empty<Explanation>())
         {
         }
 
-        public Updated(Guid key, IEnumerable<Explanation> details)
-            : this($"Aggregate with key '{ key.ToString() }' was updated.", details)
+        public Updated(object key, IEnumerable<Explanation> details)
+            : this($"Object with key '{ key.ToString() }' was updated.", details)
         {
         }
     }

@@ -1,8 +1,8 @@
 ﻿namespace GeekLearning.Domain.Explanations
 {
+    using GeekLearning.Domain.Validation;
     using System.Collections.Generic;
     using System.Linq;
-    using Validation;
 
     public class Validation<TAggregate> : Explanation
     {
@@ -15,7 +15,7 @@
             : base(message, $"AggregateType : { typeof(TAggregate).FullName }", result.Errors.Select(e => new ValidationFailure<TAggregate>(e)).ToList())
         {
         }
-      
+
         public Validation(IValidationResult result)
             : this("Aggregate is invalid.", result)
         {

@@ -7,7 +7,7 @@
     using System.Linq.Expressions;
     using System.Reflection;
 
-    public abstract class AggregateBase<TEntity>:IAggregate
+    public abstract class AggregateBase<TEntity> : IAggregate
     {
         public AggregateBase(TEntity entity)
         {
@@ -33,18 +33,10 @@
             {
                 var factoryType = typeof(TFactory);
 
-                ConstructorInfo constructorInfo;
-                MethodInfo asexceptionMethod;
                 var exceptionType = typeof(InvalidAggregateAccess<>).MakeGenericType(typeof(TAggregate));
 
-#if NET45
-                constructorInfo = factoryType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Single();
-                asexceptionMethod = exceptionType.GetMethod("AsException", new Type[0], new ParameterModifier[0]);
-
-#else
-                constructorInfo = System.Reflection.TypeExtensions.GetConstructors(factoryType, BindingFlags.Instance | BindingFlags.NonPublic).Single();
-                asexceptionMethod = System.Reflection.TypeExtensions.GetMethod(exceptionType, "AsException", new Type[0]);
-#endif
+                var constructorInfo = factoryType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic).Single();
+                var asexceptionMethod = exceptionType.GetMethod("AsException", new Type[0], new ParameterModifier[0]);
 
                 // TODO: improve
                 var parameters = constructorInfo.GetParameters().Skip(1);
@@ -68,12 +60,7 @@
 
             public virtual TAggregate Build()
             {
-                ConstructorInfo constructorInfo;
-#if NET45
-                constructorInfo = typeof(TAggregate).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(TEntity) }, null);
-#else
-                constructorInfo = System.Reflection.TypeExtensions.GetConstructors(typeof(TAggregate), BindingFlags.Instance | BindingFlags.NonPublic).Single();
-#endif   
+                var constructorInfo = typeof(TAggregate).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(TEntity) }, null);
                 return constructorInfo.Invoke(new object[] { Entity }) as TAggregate;
             }
         }

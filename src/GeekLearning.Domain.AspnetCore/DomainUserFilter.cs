@@ -6,7 +6,7 @@
 
     public class DomainUserFilter : ActionFilterAttribute
     {
-        private IEnumerable<IIdentityDomain> identityDomains;
+        private readonly IEnumerable<IIdentityDomain> identityDomains;
         private readonly ILogger<DomainUserFilter> logger;
 
         public DomainUserFilter(

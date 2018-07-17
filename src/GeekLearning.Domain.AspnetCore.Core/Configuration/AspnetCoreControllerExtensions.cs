@@ -71,17 +71,16 @@
         {
             var feature = controller.HttpContext.Features.Get<IExceptionHandlerFeature>();
             var exception = feature?.Error;
-            var domainException = exception as DomainException;
 
-            if (domainException == null)
+            if (!(exception is DomainException domainException))
             {
                 return controller.View(errorViewName);
             }
 
-            var resultMapper = controller.HttpContext.RequestServices.GetRequiredService<Internal.MaybeResultMapper>();
-            var statusCode = resultMapper.GetResult(domainException.Explanation);
+            var resultMapper = controller.HttpContext.RequestServices.GetRequiredService<Policy.IPolicy>();
+            var statusCode = resultMapper.GetStatusCode(domainException.Explanation);
 
-            controller.HttpContext.Response.StatusCode = statusCode;
+            controller.HttpContext.Response.StatusCode = (int)statusCode;
             controller.HttpContext.Response.Headers.Add("x-request-id", controller.HttpContext.TraceIdentifier);
 
             return controller.View(domainErrorViewName, domainException);

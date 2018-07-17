@@ -1,13 +1,19 @@
 ﻿namespace GeekLearning.Domain.Explanations
 {
-    public class Unremovable<T> : Explanation
+    public class Unremovable : Explanation
     {
         public Unremovable(string message)
-            : base(message, $"Element : { typeof(T).FullName }")
+            : base(message)
         {
         }
+
+        public Unremovable(string message, string internalMessage)
+            : base(message, internalMessage)
+        {
+        }
+
         public Unremovable(object key)
-            : this($"Element with key '{ (key ?? "<null>").ToString() }' cannot be removed because it is referenced elsewhere.")
+            : this($"Object with key '{ (key ?? "<null>").ToString() }' cannot be removed because it is referenced elsewhere.")
         {
         }
     }

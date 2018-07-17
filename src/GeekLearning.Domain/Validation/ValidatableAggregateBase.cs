@@ -41,10 +41,11 @@
             return this.validator.ValidateAsync(this);
         }
     }
+
     public abstract class ValidatableAggregateBase<TEntity, TValidator> : AggregateBase<TEntity>, IValidatableAggregate
        where TValidator : IValidator
     {
-        protected abstract IValidator validator { get; }
+        protected abstract IValidator Validator { get; }
 
         public ValidatableAggregateBase(TEntity entity)
             : base(entity)
@@ -53,14 +54,12 @@
 
         public Task<IValidationResult> ValidateAsync()
         {
-            return this.validator.ValidateAsync(this);
+            return this.Validator.ValidateAsync(this);
         }
 
         public Task ValidateAndThrowAsync()
         {
-            return this.validator.ValidateAndThrowAsync(this);
+            return this.Validator.ValidateAndThrowAsync(this);
         }
-
     }
-
 }
