@@ -1,13 +1,12 @@
 ﻿namespace GeekLearning.Domain.Explanations
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
     public class Updated : Explanation
     {
         public Updated(string message, IEnumerable<Explanation> details)
-            : base(message,  details)
+            : base(message, details)
         {
         }
 

@@ -2,8 +2,8 @@
 {
     using Domain;
     using System;
-    using System.Threading.Tasks;
     using System.Security.Claims;
+    using System.Threading.Tasks;
 
     public abstract class ValidatableDomainBase<TUser> : IDomain<TUser>
         where TUser : class, IAggregate

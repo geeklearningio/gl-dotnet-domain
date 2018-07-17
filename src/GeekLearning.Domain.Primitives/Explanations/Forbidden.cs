@@ -2,11 +2,11 @@
 {
     public class Forbidden : Explanation
     {
-        public Forbidden() 
+        public Forbidden()
             : this("The action is forbidden for the current user.")
         {
         }
-        
+
         public Forbidden(string message)
             : base(message)
         {

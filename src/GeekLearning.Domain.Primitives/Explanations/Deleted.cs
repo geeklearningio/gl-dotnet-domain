@@ -1,6 +1,6 @@
 ﻿namespace GeekLearning.Domain.Explanations
 {
-    public class Deleted : Explanation 
+    public class Deleted : Explanation
     {
         public Deleted(string message)
             : base(message)
