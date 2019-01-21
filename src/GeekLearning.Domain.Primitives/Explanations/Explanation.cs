@@ -30,6 +30,11 @@
         {
         }
 
+        public Explanation(string message, string internalMessage, IEnumerable<Explanation> details)
+            : this(message, internalMessage, details, null)
+        {
+        }
+
         public string Message { get; }
 
         public string InternalMessage { get; }
