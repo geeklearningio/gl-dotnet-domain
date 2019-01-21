@@ -13,6 +13,8 @@
 
         public string Type { get; set; }
 
+        public object Data { get; set; }
+
         public object DebugData { get; set; }
 
         public IEnumerable<ResponseExplanation> Details { get; set; }
@@ -28,7 +30,8 @@
             {
                 Message = explanation.Message,
                 Type = GetRealTypeName(explanation.GetType()),
-                DebugData = isDebugEnabled ? explanation.InternalMessage : null
+                DebugData = isDebugEnabled ? explanation.InternalMessage : null,
+                Data = explanation.Data
             };
 
             if (explanation.Details.Any())
