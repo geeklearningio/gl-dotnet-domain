@@ -11,7 +11,12 @@
         }
 
         public Invalid(string message, string innerMessage, IEnumerable<Explanation> details)
-           : base(message, details)
+           : base(message, innerMessage, details)
+        {
+        }
+
+        public Invalid(string message, string innerMessage, IEnumerable<Explanation> details, object data)
+            : base(message, innerMessage, details, data)
         {
         }
 
