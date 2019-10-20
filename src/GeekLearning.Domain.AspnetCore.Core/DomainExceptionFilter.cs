@@ -62,9 +62,11 @@
                typeof(Response<object>),
                result.Value);
 
-            var acceptableMediaTypes = MediaTypeHeaderValue.ParseList(context.HttpContext.Request.Headers[HeaderNames.Accept]).Where(mt => mt.Quality >= 0.8) //to discuss. The asp.net core technique rounds up to 1 too
-                .Where(mt => mt.MediaType.Value != "*/*")
-                .ToList();
+            //cf issue https://github.com/aspnet/AspNetCore/issues/15209 to parse request accept headers
+            var acceptableMediaTypes = MediaTypeHeaderValue.ParseList(context.HttpContext.Request.Headers[HeaderNames.Accept])
+                .Where(mt => mt.MediaType.Value != "*/*").ToList();
+            acceptableMediaTypes.ForEach(m => m.Quality ??= 1); //no specified quality means maximum
+            acceptableMediaTypes = acceptableMediaTypes.OrderByDescending(m => m.Quality).ToList();
 
             if (acceptableMediaTypes.Any())
             {
