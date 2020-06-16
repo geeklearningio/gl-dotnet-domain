@@ -12,7 +12,7 @@
             return new Page<TAggregate>(
                 pageIndex,
                 pageSize,
-                await query.Skip(pageIndex * pageSize).Take(pageSize).ToAsyncEnumerable().Select(selector).ToList(),
+                (await query.Skip(pageIndex * pageSize).Take(pageSize).ToListAsync()).Select(selector).ToList(),
                 await query.CountAsync()
             );
         }
