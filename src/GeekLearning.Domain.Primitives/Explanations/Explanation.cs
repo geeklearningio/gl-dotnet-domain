@@ -7,31 +7,39 @@
 
     public class Explanation
     {
-        public Explanation(string message, string internalMessage, IEnumerable<Explanation> details)
+        public Explanation(string message, string internalMessage, IEnumerable<Explanation> details, object data)
         {
             this.Message = message;
             this.InternalMessage = internalMessage;
             this.Details = details;
+            this.Data = data;
         }
 
         public Explanation(string message)
-            : this(message, null, Enumerable.Empty<Explanation>())
+            : this(message, null, Enumerable.Empty<Explanation>(), null)
         {
         }
 
         public Explanation(string message, IEnumerable<Explanation> details)
-            : this(message, null, details)
+            : this(message, null, details, null)
         {
         }
 
         public Explanation(string message, string internalMessage)
-            : this(message, internalMessage, Enumerable.Empty<Explanation>())
+            : this(message, internalMessage, Enumerable.Empty<Explanation>(), null)
+        {
+        }
+
+        public Explanation(string message, string internalMessage, IEnumerable<Explanation> details)
+            : this(message, internalMessage, details, null)
         {
         }
 
         public string Message { get; }
 
         public string InternalMessage { get; }
+
+        public object Data { get; }
 
         public IEnumerable<Explanation> Details { get; } = Enumerable.Empty<Explanation>();
 
